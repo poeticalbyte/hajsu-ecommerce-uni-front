@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useMemo, useEffect } from 'react'
+import { useState, useMemo, useEffect, Suspense } from 'react'
 import { useSearchParams } from 'next/navigation'
 import { Navbar } from '@/components/navbar'
 import { Footer } from '@/components/footer'
@@ -23,7 +23,7 @@ import {
   SheetTitle,
   SheetTrigger,
 } from '@/components/ui/sheet'
-import { SlidersHorizontal, Grid3X3, LayoutList, X } from 'lucide-react'
+import { SlidersHorizontal, Grid3X3, LayoutList, X, Loader2 } from 'lucide-react'
 
 const sortOptions = [
   { value: 'featured', label: 'Featured' },
@@ -34,6 +34,26 @@ const sortOptions = [
 ]
 
 export default function ProductsPage() {
+  return (
+    <Suspense fallback={<ProductsPageFallback />}>
+      <ProductsPageContent />
+    </Suspense>
+  )
+}
+
+function ProductsPageFallback() {
+  return (
+    <main className="min-h-screen">
+      <Navbar />
+      <div className="flex items-center justify-center py-32">
+        <Loader2 className="h-8 w-8 animate-spin text-primary" />
+      </div>
+      <Footer />
+    </main>
+  )
+}
+
+function ProductsPageContent() {
   const searchParams = useSearchParams()
   const categoryParam = searchParams.get('category')
   
