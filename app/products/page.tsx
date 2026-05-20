@@ -269,8 +269,8 @@ function ProductsPageContent() {
             {selectedCategory !== 'all'
               ? categories.find(
                   (c) => c.toLowerCase() === selectedCategory.toLowerCase()
-                ) || 'Products'
-              : 'All Products'}
+                ) || 'Catalogue'
+              : 'Catalogue'}
           </h1>
           <p className="mt-2 text-muted-foreground">
             {filteredProducts.length} products found

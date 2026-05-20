@@ -7,12 +7,12 @@ import Link from 'next/link'
 export function HeroSection() {
   return (
     <section className="relative overflow-hidden">
-      {/* Colorful gradient background */}
-      <div className="absolute inset-0 bg-gradient-to-br from-[oklch(0.95_0.02_85)] via-background to-[oklch(0.96_0.02_195)]" />
+      {/* Warm gradient background */}
+      <div className="absolute inset-0 bg-gradient-to-br from-secondary via-background to-secondary/50" />
       
-      {/* Decorative color blocks */}
-      <div className="absolute top-0 right-0 w-1/3 h-32 bg-gradient-to-l from-primary/10 to-transparent" />
-      <div className="absolute bottom-0 left-0 w-1/4 h-24 bg-gradient-to-r from-turquoise/10 to-transparent" />
+      {/* Decorative color accents */}
+      <div className="absolute top-0 right-0 w-1/3 h-40 bg-gradient-to-l from-primary/8 to-transparent" />
+      <div className="absolute bottom-0 left-0 w-1/4 h-32 bg-gradient-to-r from-gold/10 to-transparent" />
 
       {/* Subtle Andean pattern overlay */}
       <div className="absolute inset-0 opacity-[0.04]">

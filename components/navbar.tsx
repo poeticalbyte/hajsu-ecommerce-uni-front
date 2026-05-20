@@ -1,10 +1,10 @@
 'use client'
 
 import Link from 'next/link'
-import { Search, ShoppingCart, Menu, X, User, Heart } from 'lucide-react'
+import { Search, ShoppingCart, Menu, X, Settings } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
-import { useStore, categories } from '@/lib/store'
+import { useStore } from '@/lib/store'
 import { useState } from 'react'
 import { CartSidebar } from './cart-sidebar'
 
@@ -55,27 +55,30 @@ export function Navbar() {
             </Link>
 
             {/* Desktop Navigation */}
-            <div className="hidden items-center gap-8 lg:flex">
+            <div className="hidden items-center gap-10 lg:flex">
               <Link
-                href="/products"
-                className="text-sm font-medium tracking-wide text-muted-foreground transition-colors hover:text-primary"
+                href="/"
+                className="text-sm font-medium tracking-wide text-foreground transition-colors hover:text-primary"
               >
-                Shop All
+                Home
               </Link>
-              {categories.slice(0, 5).map((category) => (
-                <Link
-                  key={category}
-                  href={`/products?category=${category.toLowerCase()}`}
-                  className="text-sm font-medium tracking-wide text-muted-foreground transition-colors hover:text-primary"
-                >
-                  {category}
-                </Link>
-              ))}
               <Link
                 href="/products"
                 className="text-sm font-medium tracking-wide text-muted-foreground transition-colors hover:text-primary"
               >
-                Our Story
+                Catalogue
+              </Link>
+              <button
+                onClick={toggleCart}
+                className="text-sm font-medium tracking-wide text-muted-foreground transition-colors hover:text-primary"
+              >
+                Cart {cartCount > 0 && `(${cartCount})`}
+              </button>
+              <Link
+                href="/admin"
+                className="text-sm font-medium tracking-wide text-muted-foreground transition-colors hover:text-primary"
+              >
+                Admin
               </Link>
             </div>
 
@@ -106,17 +109,11 @@ export function Navbar() {
                 <span className="sr-only">Search</span>
               </Button>
 
-              {/* Wishlist */}
-              <Button variant="ghost" size="icon" className="hidden sm:flex hover:bg-secondary">
-                <Heart className="h-5 w-5" />
-                <span className="sr-only">Wishlist</span>
-              </Button>
-
-              {/* User Account */}
-              <Link href="/admin">
+              {/* Admin */}
+              <Link href="/admin" className="hidden sm:flex">
                 <Button variant="ghost" size="icon" className="hover:bg-secondary">
-                  <User className="h-5 w-5" />
-                  <span className="sr-only">Account</span>
+                  <Settings className="h-5 w-5" />
+                  <span className="sr-only">Admin</span>
                 </Button>
               </Link>
 
@@ -174,29 +171,35 @@ export function Navbar() {
             <div className="border-t border-border py-6 lg:hidden">
               <div className="flex flex-col gap-4">
                 <Link
-                  href="/products"
+                  href="/"
                   className="text-lg font-medium text-foreground transition-colors hover:text-primary"
                   onClick={() => setIsMenuOpen(false)}
                 >
-                  Shop All
+                  Home
                 </Link>
-                {categories.map((category) => (
-                  <Link
-                    key={category}
-                    href={`/products?category=${category.toLowerCase()}`}
-                    className="text-lg font-medium text-muted-foreground transition-colors hover:text-primary"
-                    onClick={() => setIsMenuOpen(false)}
-                  >
-                    {category}
-                  </Link>
-                ))}
-                <div className="my-2 border-t border-border" />
                 <Link
                   href="/products"
                   className="text-lg font-medium text-muted-foreground transition-colors hover:text-primary"
                   onClick={() => setIsMenuOpen(false)}
                 >
-                  Our Story
+                  Catalogue
+                </Link>
+                <button
+                  onClick={() => {
+                    toggleCart()
+                    setIsMenuOpen(false)
+                  }}
+                  className="text-left text-lg font-medium text-muted-foreground transition-colors hover:text-primary"
+                >
+                  Cart {cartCount > 0 && `(${cartCount})`}
+                </button>
+                <div className="my-2 border-t border-border" />
+                <Link
+                  href="/admin"
+                  className="text-lg font-medium text-muted-foreground transition-colors hover:text-primary"
+                  onClick={() => setIsMenuOpen(false)}
+                >
+                  Admin
                 </Link>
               </div>
             </div>
