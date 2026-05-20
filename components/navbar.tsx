@@ -2,7 +2,7 @@
 
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
-import { ShoppingCart, Menu, X, LogIn, LogOut, User } from 'lucide-react'
+import { ShoppingCart, Menu, X, User } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { useStore } from '@/lib/store'
 import { useState } from 'react'
@@ -71,55 +71,34 @@ export function Navbar() {
               >
                 Catalogue
               </Link>
-              {user ? (
+              <Link
+                href="/about"
+                className="text-sm font-medium tracking-wide text-muted-foreground transition-colors hover:text-primary"
+              >
+                About Us
+              </Link>
+              {user && (
                 <Link
                   href="/admin"
                   className="text-sm font-medium tracking-wide text-muted-foreground transition-colors hover:text-primary"
                 >
                   Admin
                 </Link>
-              ) : (
-                <button
-                  onClick={toggleSignIn}
-                  className="text-sm font-medium tracking-wide text-muted-foreground transition-colors hover:text-primary"
-                >
-                  Sign In
-                </button>
               )}
             </div>
 
             {/* Actions */}
             <div className="flex items-center gap-1">
-              {/* User/Sign In */}
-              {user ? (
-                <div className="hidden sm:flex items-center gap-1">
-                  <Link href="/admin">
-                    <Button variant="ghost" size="icon" className="hover:bg-secondary">
-                      <User className="h-5 w-5" />
-                      <span className="sr-only">Admin</span>
-                    </Button>
-                  </Link>
-                  <Button
-                    variant="ghost"
-                    size="icon"
-                    className="hover:bg-secondary"
-                    onClick={handleSignOut}
-                  >
-                    <LogOut className="h-5 w-5" />
-                    <span className="sr-only">Sign Out</span>
-                  </Button>
-                </div>
-              ) : (
-                <Button
-                  variant="ghost"
-                  size="icon"
-                  className="hidden sm:flex hover:bg-secondary"
-                  onClick={toggleSignIn}
-                >
-                  <LogIn className="h-5 w-5" />
-                  <span className="sr-only">Sign In</span>
-                </Button>
-              )}
+              {/* User Icon - Sign In or go to Admin */}
+              <Button
+                variant="ghost"
+                size="icon"
+                className="hover:bg-secondary"
+                onClick={user ? () => router.push('/admin') : toggleSignIn}
+              >
+                <User className="h-5 w-5" />
+                <span className="sr-only">{user ? 'Account' : 'Sign In'}</span>
+              </Button>
 
               {/* Cart */}
               <Button
@@ -171,6 +150,13 @@ export function Navbar() {
                   onClick={() => setIsMenuOpen(false)}
                 >
                   Catalogue
+                </Link>
+                <Link
+                  href="/about"
+                  className="text-base font-medium text-muted-foreground transition-colors hover:text-primary"
+                  onClick={() => setIsMenuOpen(false)}
+                >
+                  About Us
                 </Link>
                 <div className="my-2 border-t border-border" />
                 {user ? (
