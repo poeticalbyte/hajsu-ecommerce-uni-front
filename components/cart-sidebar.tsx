@@ -16,42 +16,45 @@ export function CartSidebar() {
     <>
       {/* Backdrop */}
       <div
-        className="fixed inset-0 z-50 bg-black/60 backdrop-blur-sm"
+        className="fixed inset-0 z-50 bg-foreground/40 backdrop-blur-sm"
         onClick={() => setCartOpen(false)}
       />
 
       {/* Sidebar */}
       <div className="fixed right-0 top-0 z-50 flex h-full w-full max-w-md flex-col bg-background shadow-2xl">
+        {/* Decorative top border */}
+        <div className="h-1 w-full bg-gradient-to-r from-primary via-accent to-primary" />
+        
         {/* Header */}
-        <div className="flex items-center justify-between border-b border-border p-4">
-          <div className="flex items-center gap-2">
-            <ShoppingBag className="h-5 w-5" />
-            <h2 className="text-lg font-semibold">Shopping Cart</h2>
-            <span className="rounded-full bg-primary px-2 py-0.5 text-xs font-medium text-primary-foreground">
+        <div className="flex items-center justify-between border-b border-border p-5">
+          <div className="flex items-center gap-3">
+            <ShoppingBag className="h-5 w-5 text-primary" />
+            <h2 className="text-lg font-semibold tracking-wide">Your Cart</h2>
+            <span className="bg-primary px-2 py-0.5 text-xs font-medium text-primary-foreground">
               {cart.length}
             </span>
           </div>
-          <Button variant="ghost" size="icon" onClick={() => setCartOpen(false)}>
+          <Button variant="ghost" size="icon" onClick={() => setCartOpen(false)} className="hover:bg-secondary">
             <X className="h-5 w-5" />
             <span className="sr-only">Close cart</span>
           </Button>
         </div>
 
         {/* Cart Items */}
-        <div className="flex-1 overflow-y-auto p-4">
+        <div className="flex-1 overflow-y-auto p-5">
           {cart.length === 0 ? (
-            <div className="flex h-full flex-col items-center justify-center gap-4 text-center">
-              <div className="flex h-20 w-20 items-center justify-center rounded-full bg-secondary">
-                <ShoppingBag className="h-10 w-10 text-muted-foreground" />
+            <div className="flex h-full flex-col items-center justify-center gap-6 text-center">
+              <div className="flex h-24 w-24 items-center justify-center border-2 border-dashed border-border">
+                <ShoppingBag className="h-12 w-12 text-muted-foreground" />
               </div>
               <div>
-                <p className="font-medium">Your cart is empty</p>
-                <p className="text-sm text-muted-foreground">
-                  Add items to get started
+                <p className="font-semibold text-lg">Your cart is empty</p>
+                <p className="text-sm text-muted-foreground mt-1">
+                  Discover our handcrafted Andean textiles
                 </p>
               </div>
-              <Button onClick={() => setCartOpen(false)} asChild>
-                <Link href="/products">Continue Shopping</Link>
+              <Button onClick={() => setCartOpen(false)} className="rounded-none" asChild>
+                <Link href="/products">Explore Collection</Link>
               </Button>
             </div>
           ) : (
@@ -59,9 +62,9 @@ export function CartSidebar() {
               {cart.map((item) => (
                 <div
                   key={`${item.id}-${item.selectedSize}-${item.selectedColor}`}
-                  className="flex gap-4 rounded-lg bg-card p-3"
+                  className="flex gap-4 border-b border-border pb-4"
                 >
-                  <div className="relative h-20 w-20 flex-shrink-0 overflow-hidden rounded-md bg-secondary">
+                  <div className="relative h-24 w-20 flex-shrink-0 overflow-hidden bg-secondary">
                     <Image
                       src={item.image}
                       alt={item.name}
@@ -72,11 +75,11 @@ export function CartSidebar() {
                   <div className="flex flex-1 flex-col">
                     <div className="flex items-start justify-between">
                       <div>
-                        <h3 className="text-sm font-medium line-clamp-1">
+                        <h3 className="text-sm font-medium line-clamp-2">
                           {item.name}
                         </h3>
                         {(item.selectedSize || item.selectedColor) && (
-                          <p className="text-xs text-muted-foreground">
+                          <p className="text-xs text-muted-foreground mt-1">
                             {item.selectedColor} {item.selectedSize && `/ ${item.selectedSize}`}
                           </p>
                         )}
@@ -91,12 +94,12 @@ export function CartSidebar() {
                         <span className="sr-only">Remove</span>
                       </Button>
                     </div>
-                    <div className="mt-auto flex items-center justify-between">
-                      <div className="flex items-center gap-2">
+                    <div className="mt-auto flex items-center justify-between pt-2">
+                      <div className="flex items-center gap-1">
                         <Button
                           variant="outline"
                           size="icon"
-                          className="h-7 w-7"
+                          className="h-7 w-7 rounded-none"
                           onClick={() =>
                             updateQuantity(item.id, Math.max(1, item.quantity - 1))
                           }
@@ -111,7 +114,7 @@ export function CartSidebar() {
                         <Button
                           variant="outline"
                           size="icon"
-                          className="h-7 w-7"
+                          className="h-7 w-7 rounded-none"
                           onClick={() => updateQuantity(item.id, item.quantity + 1)}
                         >
                           <Plus className="h-3 w-3" />
@@ -131,33 +134,38 @@ export function CartSidebar() {
 
         {/* Footer */}
         {cart.length > 0 && (
-          <div className="border-t border-border p-4">
-            <div className="mb-4 space-y-2">
+          <div className="border-t border-border p-5">
+            <div className="mb-5 space-y-2">
               <div className="flex items-center justify-between text-sm">
                 <span className="text-muted-foreground">Subtotal</span>
                 <span>${total.toFixed(2)}</span>
               </div>
               <div className="flex items-center justify-between text-sm">
                 <span className="text-muted-foreground">Shipping</span>
-                <span className="text-success">Free</span>
+                <span className="text-primary">{total >= 150 ? 'Free' : '$15.00'}</span>
               </div>
-              <div className="flex items-center justify-between border-t border-border pt-2 text-lg font-semibold">
+              {total < 150 && (
+                <p className="text-xs text-muted-foreground">
+                  Add ${(150 - total).toFixed(2)} more for free shipping
+                </p>
+              )}
+              <div className="flex items-center justify-between border-t border-border pt-3 text-lg font-semibold">
                 <span>Total</span>
-                <span>${total.toFixed(2)}</span>
+                <span>${(total >= 150 ? total : total + 15).toFixed(2)}</span>
               </div>
             </div>
             <div className="flex flex-col gap-2">
-              <Button asChild size="lg" className="w-full" onClick={() => setCartOpen(false)}>
+              <Button asChild size="lg" className="w-full rounded-none" onClick={() => setCartOpen(false)}>
                 <Link href="/checkout">Proceed to Checkout</Link>
               </Button>
               <Button
                 variant="outline"
                 size="lg"
-                className="w-full"
+                className="w-full rounded-none"
                 onClick={() => setCartOpen(false)}
                 asChild
               >
-                <Link href="/cart">View Cart</Link>
+                <Link href="/cart">View Full Cart</Link>
               </Button>
             </div>
           </div>

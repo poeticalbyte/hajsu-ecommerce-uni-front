@@ -1,18 +1,25 @@
 import type { Metadata, Viewport } from 'next'
-import { Inter } from 'next/font/google'
+import { Cormorant_Garamond, Source_Sans_3 } from 'next/font/google'
 import { Analytics } from '@vercel/analytics/next'
 import './globals.css'
 
-const inter = Inter({ 
+const cormorant = Cormorant_Garamond({ 
   subsets: ['latin'],
-  variable: '--font-inter',
+  weight: ['400', '500', '600', '700'],
+  variable: '--font-cormorant',
+})
+
+const sourceSans = Source_Sans_3({ 
+  subsets: ['latin'],
+  weight: ['400', '500', '600'],
+  variable: '--font-source-sans',
 })
 
 export const metadata: Metadata = {
-  title: 'NovaShop | Premium E-Commerce',
-  description: 'Discover the latest trends and timeless classics. Your premium destination for quality products.',
+  title: 'Qhawa | Authentic Andean Textiles & Traditional Clothing',
+  description: 'Discover handcrafted Andean clothing and textiles. Authentic alpaca wool garments, traditional ponchos, and artisanal accessories from the heart of the Andes.',
   generator: 'v0.app',
-  keywords: ['e-commerce', 'shop', 'fashion', 'electronics', 'accessories'],
+  keywords: ['andean textiles', 'alpaca wool', 'traditional clothing', 'peruvian fashion', 'handwoven', 'artisanal', 'ponchos', 'indigenous crafts'],
   icons: {
     icon: [
       {
@@ -33,7 +40,7 @@ export const metadata: Metadata = {
 }
 
 export const viewport: Viewport = {
-  themeColor: '#1a1a1a',
+  themeColor: '#8B4513',
   width: 'device-width',
   initialScale: 1,
 }
@@ -44,7 +51,7 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html lang="en" className={`${inter.variable} bg-background`}>
+    <html lang="en" className={`${cormorant.variable} ${sourceSans.variable} bg-background`}>
       <body className="font-sans antialiased">
         {children}
         {process.env.NODE_ENV === 'production' && <Analytics />}

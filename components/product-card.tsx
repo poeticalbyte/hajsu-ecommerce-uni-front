@@ -23,41 +23,41 @@ export function ProductCard({ product, variant = 'default' }: ProductCardProps) 
 
   return (
     <Link href={`/products/${product.id}`} className="group block">
-      <div className="relative overflow-hidden rounded-xl bg-card transition-all duration-300 hover:shadow-lg hover:shadow-primary/5">
+      <div className="relative overflow-hidden bg-card transition-all duration-300 hover:shadow-lg hover:shadow-primary/10">
         {/* Image Container */}
-        <div className="relative aspect-square overflow-hidden bg-secondary">
+        <div className="relative aspect-[3/4] overflow-hidden bg-secondary">
           <Image
             src={product.image}
             alt={product.name}
             fill
-            className="object-cover transition-transform duration-500 group-hover:scale-105"
+            className="object-cover transition-transform duration-700 group-hover:scale-105"
           />
           
           {/* Badges */}
-          <div className="absolute left-3 top-3 flex flex-col gap-2">
+          <div className="absolute left-0 top-4 flex flex-col gap-2">
             {product.discount && (
-              <span className="rounded-full bg-destructive px-2 py-1 text-xs font-semibold text-destructive-foreground">
+              <span className="bg-accent px-3 py-1 text-xs font-medium tracking-wide text-accent-foreground">
                 -{product.discount}%
               </span>
             )}
             {product.isNew && (
-              <span className="rounded-full bg-primary px-2 py-1 text-xs font-semibold text-primary-foreground">
-                New
+              <span className="bg-primary px-3 py-1 text-xs font-medium tracking-wide text-primary-foreground">
+                New Arrival
               </span>
             )}
           </div>
 
           {/* Quick Actions */}
-          <div className="absolute bottom-3 left-3 right-3 flex gap-2 opacity-0 translate-y-4 transition-all duration-300 group-hover:opacity-100 group-hover:translate-y-0">
+          <div className="absolute bottom-4 left-4 right-4 flex gap-2 opacity-0 translate-y-4 transition-all duration-300 group-hover:opacity-100 group-hover:translate-y-0">
             <Button
               onClick={handleAddToCart}
-              className="flex-1 gap-2"
+              className="flex-1 gap-2 rounded-none"
               size="sm"
             >
               <ShoppingCart className="h-4 w-4" />
               Add to Cart
             </Button>
-            <Button variant="secondary" size="icon" className="shrink-0">
+            <Button variant="secondary" size="icon" className="shrink-0 rounded-none">
               <Eye className="h-4 w-4" />
               <span className="sr-only">Quick view</span>
             </Button>
@@ -66,8 +66,8 @@ export function ProductCard({ product, variant = 'default' }: ProductCardProps) 
 
         {/* Content */}
         <div className="p-4">
-          {/* Category & Brand */}
-          <div className="mb-2 flex items-center justify-between text-xs text-muted-foreground">
+          {/* Category & Origin */}
+          <div className="mb-2 flex items-center justify-between text-xs text-muted-foreground uppercase tracking-wider">
             <span>{product.category}</span>
             <span>{product.brand}</span>
           </div>
@@ -79,26 +79,26 @@ export function ProductCard({ product, variant = 'default' }: ProductCardProps) 
 
           {/* Rating */}
           <div className="mb-3 flex items-center gap-2">
-            <div className="flex items-center gap-1">
+            <div className="flex items-center gap-0.5">
               {Array.from({ length: 5 }).map((_, i) => (
                 <Star
                   key={i}
                   className={`h-3.5 w-3.5 ${
                     i < Math.floor(product.rating)
-                      ? 'fill-warning text-warning'
+                      ? 'fill-accent text-accent'
                       : 'fill-muted text-muted'
                   }`}
                 />
               ))}
             </div>
             <span className="text-xs text-muted-foreground">
-              ({product.reviews.toLocaleString()})
+              ({product.reviews})
             </span>
           </div>
 
           {/* Price */}
           <div className="flex items-center gap-2">
-            <span className="text-lg font-bold text-foreground">
+            <span className="text-lg font-semibold text-foreground">
               ${product.price.toFixed(2)}
             </span>
             {product.originalPrice && (
@@ -108,10 +108,10 @@ export function ProductCard({ product, variant = 'default' }: ProductCardProps) 
             )}
           </div>
 
-          {/* Stock Status */}
-          {variant === 'default' && product.stock < 10 && product.stock > 0 && (
-            <p className="mt-2 text-xs text-warning">
-              Only {product.stock} left in stock
+          {/* Materials hint */}
+          {variant === 'default' && product.materials && product.materials[0] && (
+            <p className="mt-2 text-xs text-muted-foreground">
+              {product.materials[0]}
             </p>
           )}
         </div>

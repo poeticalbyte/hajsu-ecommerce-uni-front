@@ -1,25 +1,25 @@
-import { Truck, Shield, CreditCard, Headphones } from 'lucide-react'
+import { Truck, Shield, Heart, Users } from 'lucide-react'
 
 const features = [
   {
+    icon: Users,
+    title: 'Artisan Partners',
+    description: 'Supporting 50+ weaving communities',
+  },
+  {
+    icon: Heart,
+    title: 'Fair Trade',
+    description: 'Ethically sourced & fairly paid',
+  },
+  {
     icon: Truck,
-    title: 'Free Shipping',
-    description: 'Free delivery on orders over $50',
+    title: 'Worldwide Shipping',
+    description: 'Free delivery on orders over $150',
   },
   {
     icon: Shield,
-    title: 'Secure Payment',
-    description: '100% secure payment processing',
-  },
-  {
-    icon: CreditCard,
-    title: 'Easy Returns',
-    description: '30-day money-back guarantee',
-  },
-  {
-    icon: Headphones,
-    title: '24/7 Support',
-    description: 'Dedicated customer support',
+    title: 'Authenticity Guaranteed',
+    description: 'Certificate of origin included',
   },
 ]
 
@@ -33,11 +33,11 @@ export function FeaturesSection() {
               key={feature.title}
               className="flex items-start gap-4"
             >
-              <div className="flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-xl bg-primary/10 text-primary">
+              <div className="flex h-12 w-12 flex-shrink-0 items-center justify-center border-2 border-primary/20 text-primary">
                 <feature.icon className="h-6 w-6" />
               </div>
               <div>
-                <h3 className="font-semibold">{feature.title}</h3>
+                <h3 className="font-semibold tracking-wide">{feature.title}</h3>
                 <p className="mt-1 text-sm text-muted-foreground">
                   {feature.description}
                 </p>

@@ -4,83 +4,104 @@
 @custom-variant dark (&:is(.dark *));
 
 :root {
-  --background: oklch(0.08 0 0);
-  --foreground: oklch(0.98 0 0);
-  --card: oklch(0.12 0 0);
-  --card-foreground: oklch(0.98 0 0);
-  --popover: oklch(0.1 0 0);
-  --popover-foreground: oklch(0.98 0 0);
-  --primary: oklch(0.65 0.28 280);
-  --primary-foreground: oklch(0.98 0 0);
-  --secondary: oklch(0.18 0 0);
-  --secondary-foreground: oklch(0.98 0 0);
-  --muted: oklch(0.2 0 0);
-  --muted-foreground: oklch(0.65 0 0);
-  --accent: oklch(0.55 0.25 280);
-  --accent-foreground: oklch(0.98 0 0);
-  --destructive: oklch(0.55 0.22 25);
-  --destructive-foreground: oklch(0.98 0 0);
-  --border: oklch(0.25 0 0);
-  --input: oklch(0.18 0 0);
-  --ring: oklch(0.65 0.28 280);
-  --chart-1: oklch(0.65 0.28 280);
-  --chart-2: oklch(0.6 0.2 200);
-  --chart-3: oklch(0.7 0.18 150);
-  --chart-4: oklch(0.75 0.15 60);
-  --chart-5: oklch(0.6 0.22 320);
-  --radius: 0.75rem;
-  --sidebar: oklch(0.1 0 0);
-  --sidebar-foreground: oklch(0.98 0 0);
-  --sidebar-primary: oklch(0.65 0.28 280);
-  --sidebar-primary-foreground: oklch(0.98 0 0);
-  --sidebar-accent: oklch(0.18 0 0);
-  --sidebar-accent-foreground: oklch(0.98 0 0);
-  --sidebar-border: oklch(0.25 0 0);
-  --sidebar-ring: oklch(0.65 0.28 280);
-  --success: oklch(0.65 0.2 145);
-  --success-foreground: oklch(0.98 0 0);
-  --warning: oklch(0.75 0.18 85);
-  --warning-foreground: oklch(0.15 0 0);
+  /* Andean-inspired warm earth tones */
+  --background: oklch(0.97 0.01 75);
+  --foreground: oklch(0.25 0.04 45);
+  --card: oklch(0.99 0.005 75);
+  --card-foreground: oklch(0.25 0.04 45);
+  --popover: oklch(0.99 0.005 75);
+  --popover-foreground: oklch(0.25 0.04 45);
+  /* Terracotta primary */
+  --primary: oklch(0.52 0.14 35);
+  --primary-foreground: oklch(0.98 0.01 75);
+  /* Sand secondary */
+  --secondary: oklch(0.92 0.03 80);
+  --secondary-foreground: oklch(0.35 0.05 45);
+  /* Warm muted tones */
+  --muted: oklch(0.94 0.02 75);
+  --muted-foreground: oklch(0.5 0.04 45);
+  /* Burnt ochre accent */
+  --accent: oklch(0.58 0.16 55);
+  --accent-foreground: oklch(0.98 0.01 75);
+  /* Deep burgundy destructive */
+  --destructive: oklch(0.45 0.18 25);
+  --destructive-foreground: oklch(0.98 0.01 75);
+  /* Warm borders */
+  --border: oklch(0.88 0.03 70);
+  --input: oklch(0.94 0.02 75);
+  --ring: oklch(0.52 0.14 35);
+  /* Chart colors - Andean palette */
+  --chart-1: oklch(0.52 0.14 35);
+  --chart-2: oklch(0.55 0.12 180);
+  --chart-3: oklch(0.58 0.16 55);
+  --chart-4: oklch(0.65 0.12 85);
+  --chart-5: oklch(0.45 0.1 280);
+  --radius: 0.5rem;
+  /* Sidebar - earthy dark */
+  --sidebar: oklch(0.3 0.06 45);
+  --sidebar-foreground: oklch(0.95 0.01 75);
+  --sidebar-primary: oklch(0.58 0.16 55);
+  --sidebar-primary-foreground: oklch(0.98 0.01 75);
+  --sidebar-accent: oklch(0.38 0.05 45);
+  --sidebar-accent-foreground: oklch(0.95 0.01 75);
+  --sidebar-border: oklch(0.4 0.05 45);
+  --sidebar-ring: oklch(0.58 0.16 55);
+  /* Status colors */
+  --success: oklch(0.55 0.15 145);
+  --success-foreground: oklch(0.98 0.01 75);
+  --warning: oklch(0.65 0.15 85);
+  --warning-foreground: oklch(0.25 0.04 45);
+  /* Andean turquoise highlight */
+  --turquoise: oklch(0.6 0.12 195);
+  --turquoise-foreground: oklch(0.98 0.01 75);
+  /* Deep indigo - inspired by traditional dyes */
+  --indigo: oklch(0.4 0.12 280);
+  --indigo-foreground: oklch(0.98 0.01 75);
+  /* Gold accent */
+  --gold: oklch(0.72 0.14 85);
+  --gold-foreground: oklch(0.25 0.04 45);
 }
 
 .dark {
-  --background: oklch(0.08 0 0);
-  --foreground: oklch(0.98 0 0);
-  --card: oklch(0.12 0 0);
-  --card-foreground: oklch(0.98 0 0);
-  --popover: oklch(0.1 0 0);
-  --popover-foreground: oklch(0.98 0 0);
-  --primary: oklch(0.65 0.28 280);
-  --primary-foreground: oklch(0.98 0 0);
-  --secondary: oklch(0.18 0 0);
-  --secondary-foreground: oklch(0.98 0 0);
-  --muted: oklch(0.2 0 0);
-  --muted-foreground: oklch(0.65 0 0);
-  --accent: oklch(0.55 0.25 280);
-  --accent-foreground: oklch(0.98 0 0);
-  --destructive: oklch(0.55 0.22 25);
-  --destructive-foreground: oklch(0.98 0 0);
-  --border: oklch(0.25 0 0);
-  --input: oklch(0.18 0 0);
-  --ring: oklch(0.65 0.28 280);
-  --chart-1: oklch(0.65 0.28 280);
-  --chart-2: oklch(0.6 0.2 200);
-  --chart-3: oklch(0.7 0.18 150);
-  --chart-4: oklch(0.75 0.15 60);
-  --chart-5: oklch(0.6 0.22 320);
-  --sidebar: oklch(0.1 0 0);
-  --sidebar-foreground: oklch(0.98 0 0);
-  --sidebar-primary: oklch(0.65 0.28 280);
-  --sidebar-primary-foreground: oklch(0.98 0 0);
-  --sidebar-accent: oklch(0.18 0 0);
-  --sidebar-accent-foreground: oklch(0.98 0 0);
-  --sidebar-border: oklch(0.25 0 0);
-  --sidebar-ring: oklch(0.65 0.28 280);
+  --background: oklch(0.18 0.03 45);
+  --foreground: oklch(0.95 0.01 75);
+  --card: oklch(0.22 0.03 45);
+  --card-foreground: oklch(0.95 0.01 75);
+  --popover: oklch(0.2 0.03 45);
+  --popover-foreground: oklch(0.95 0.01 75);
+  --primary: oklch(0.62 0.14 35);
+  --primary-foreground: oklch(0.98 0.01 75);
+  --secondary: oklch(0.28 0.03 45);
+  --secondary-foreground: oklch(0.92 0.01 75);
+  --muted: oklch(0.25 0.02 45);
+  --muted-foreground: oklch(0.7 0.02 75);
+  --accent: oklch(0.65 0.16 55);
+  --accent-foreground: oklch(0.98 0.01 75);
+  --destructive: oklch(0.55 0.18 25);
+  --destructive-foreground: oklch(0.98 0.01 75);
+  --border: oklch(0.32 0.03 45);
+  --input: oklch(0.25 0.02 45);
+  --ring: oklch(0.62 0.14 35);
+  --chart-1: oklch(0.62 0.14 35);
+  --chart-2: oklch(0.6 0.12 180);
+  --chart-3: oklch(0.65 0.16 55);
+  --chart-4: oklch(0.7 0.12 85);
+  --chart-5: oklch(0.55 0.1 280);
+  --sidebar: oklch(0.15 0.03 45);
+  --sidebar-foreground: oklch(0.95 0.01 75);
+  --sidebar-primary: oklch(0.65 0.16 55);
+  --sidebar-primary-foreground: oklch(0.98 0.01 75);
+  --sidebar-accent: oklch(0.25 0.03 45);
+  --sidebar-accent-foreground: oklch(0.95 0.01 75);
+  --sidebar-border: oklch(0.3 0.03 45);
+  --sidebar-ring: oklch(0.65 0.16 55);
 }
 
 @theme inline {
-  --font-sans: 'Inter', 'Geist', 'Geist Fallback', system-ui, sans-serif;
+  --font-sans: 'Cormorant Garamond', 'Georgia', serif;
+  --font-serif: 'Cormorant Garamond', 'Georgia', serif;
   --font-mono: 'Geist Mono', 'Geist Mono Fallback', monospace;
+  --font-display: 'Cormorant Garamond', 'Georgia', serif;
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --color-card: var(--card);
@@ -105,10 +126,10 @@
   --color-chart-3: var(--chart-3);
   --color-chart-4: var(--chart-4);
   --color-chart-5: var(--chart-5);
-  --radius-sm: calc(var(--radius) - 4px);
-  --radius-md: calc(var(--radius) - 2px);
-  --radius-lg: var(--radius);
-  --radius-xl: calc(var(--radius) + 4px);
+  --radius-sm: calc(var(--radius) - 2px);
+  --radius-md: var(--radius);
+  --radius-lg: calc(var(--radius) + 2px);
+  --radius-xl: calc(var(--radius) + 6px);
   --color-sidebar: var(--sidebar);
   --color-sidebar-foreground: var(--sidebar-foreground);
   --color-sidebar-primary: var(--sidebar-primary);
@@ -121,6 +142,12 @@
   --color-success-foreground: var(--success-foreground);
   --color-warning: var(--warning);
   --color-warning-foreground: var(--warning-foreground);
+  --color-turquoise: var(--turquoise);
+  --color-turquoise-foreground: var(--turquoise-foreground);
+  --color-indigo: var(--indigo);
+  --color-indigo-foreground: var(--indigo-foreground);
+  --color-gold: var(--gold);
+  --color-gold-foreground: var(--gold-foreground);
 }
 
 @layer base {
@@ -132,10 +159,35 @@
   }
 }
 
-/* Custom scrollbar */
+/* Andean pattern decorative element */
+.andean-pattern {
+  background-image: 
+    linear-gradient(45deg, var(--primary) 25%, transparent 25%),
+    linear-gradient(-45deg, var(--primary) 25%, transparent 25%),
+    linear-gradient(45deg, transparent 75%, var(--primary) 75%),
+    linear-gradient(-45deg, transparent 75%, var(--primary) 75%);
+  background-size: 20px 20px;
+  background-position: 0 0, 0 10px, 10px -10px, -10px 0px;
+  opacity: 0.1;
+}
+
+/* Geometric border inspired by Inca textiles */
+.inca-border {
+  border-image: repeating-linear-gradient(
+    90deg,
+    var(--primary) 0px,
+    var(--primary) 8px,
+    var(--accent) 8px,
+    var(--accent) 16px,
+    var(--gold) 16px,
+    var(--gold) 24px
+  ) 4;
+}
+
+/* Custom scrollbar with earthy tones */
 ::-webkit-scrollbar {
-  width: 8px;
-  height: 8px;
+  width: 10px;
+  height: 10px;
 }
 
 ::-webkit-scrollbar-track {
@@ -143,15 +195,21 @@
 }
 
 ::-webkit-scrollbar-thumb {
-  background: var(--muted-foreground);
-  border-radius: 4px;
+  background: var(--primary);
+  border-radius: 5px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: var(--foreground);
+  background: var(--accent);
 }
 
 /* Smooth transitions */
 * {
   scroll-behavior: smooth;
+}
+
+/* Text selection with Andean colors */
+::selection {
+  background: var(--primary);
+  color: var(--primary-foreground);
 }

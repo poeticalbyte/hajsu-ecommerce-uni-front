@@ -38,29 +38,35 @@ export default function AdminLayout({
       {/* Mobile Sidebar Backdrop */}
       {sidebarOpen && (
         <div
-          className="fixed inset-0 z-40 bg-black/60 backdrop-blur-sm lg:hidden"
+          className="fixed inset-0 z-40 bg-foreground/40 backdrop-blur-sm lg:hidden"
           onClick={() => setSidebarOpen(false)}
         />
       )}
 
       {/* Sidebar */}
       <aside
-        className={`fixed left-0 top-0 z-50 flex h-full w-64 flex-col bg-card transition-transform duration-300 lg:translate-x-0 ${
+        className={`fixed left-0 top-0 z-50 flex h-full w-64 flex-col bg-sidebar transition-transform duration-300 lg:translate-x-0 ${
           sidebarOpen ? 'translate-x-0' : '-translate-x-full'
         }`}
       >
         {/* Logo */}
-        <div className="flex h-16 items-center justify-between border-b border-border px-4">
-          <Link href="/admin" className="flex items-center gap-2">
-            <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-primary">
-              <span className="text-lg font-bold text-primary-foreground">N</span>
+        <div className="flex h-20 items-center justify-between border-b border-sidebar-border px-4">
+          <Link href="/admin" className="flex items-center gap-3">
+            <svg viewBox="0 0 48 48" className="h-10 w-10" fill="none">
+              <path d="M24 4L44 44H4L24 4Z" className="fill-sidebar-primary" />
+              <path d="M24 12L38 44H10L24 12Z" className="fill-sidebar-accent" />
+              <path d="M24 20L32 44H16L24 20Z" className="fill-sidebar" />
+              <circle cx="24" cy="16" r="4" className="fill-gold" />
+            </svg>
+            <div className="flex flex-col">
+              <span className="text-lg font-semibold text-sidebar-foreground">Qhawa</span>
+              <span className="text-xs text-sidebar-foreground/60 uppercase tracking-wider">Admin</span>
             </div>
-            <span className="text-lg font-bold">Admin</span>
           </Link>
           <Button
             variant="ghost"
             size="icon"
-            className="lg:hidden"
+            className="lg:hidden text-sidebar-foreground hover:bg-sidebar-accent"
             onClick={() => setSidebarOpen(false)}
           >
             <X className="h-5 w-5" />
@@ -76,10 +82,10 @@ export default function AdminLayout({
                 key={item.href}
                 href={item.href}
                 onClick={() => setSidebarOpen(false)}
-                className={`flex items-center gap-3 rounded-lg px-3 py-2 text-sm font-medium transition-colors ${
+                className={`flex items-center gap-3 px-3 py-2.5 text-sm font-medium transition-colors ${
                   isActive
-                    ? 'bg-primary text-primary-foreground'
-                    : 'text-muted-foreground hover:bg-secondary hover:text-foreground'
+                    ? 'bg-sidebar-primary text-sidebar-primary-foreground'
+                    : 'text-sidebar-foreground/70 hover:bg-sidebar-accent hover:text-sidebar-foreground'
                 }`}
               >
                 <item.icon className="h-5 w-5" />
@@ -90,15 +96,15 @@ export default function AdminLayout({
         </nav>
 
         {/* Store Link */}
-        <div className="border-t border-border p-4">
+        <div className="border-t border-sidebar-border p-4">
           <Link
             href="/"
-            className="flex items-center gap-3 rounded-lg px-3 py-2 text-sm font-medium text-muted-foreground transition-colors hover:bg-secondary hover:text-foreground"
+            className="flex items-center gap-3 px-3 py-2.5 text-sm font-medium text-sidebar-foreground/70 transition-colors hover:bg-sidebar-accent hover:text-sidebar-foreground"
           >
             <Store className="h-5 w-5" />
             View Store
           </Link>
-          <button className="mt-2 flex w-full items-center gap-3 rounded-lg px-3 py-2 text-sm font-medium text-muted-foreground transition-colors hover:bg-secondary hover:text-foreground">
+          <button className="mt-1 flex w-full items-center gap-3 px-3 py-2.5 text-sm font-medium text-sidebar-foreground/70 transition-colors hover:bg-sidebar-accent hover:text-sidebar-foreground">
             <LogOut className="h-5 w-5" />
             Logout
           </button>
@@ -120,13 +126,13 @@ export default function AdminLayout({
 
           <div className="flex items-center gap-4 ml-auto">
             {/* User Menu */}
-            <div className="flex items-center gap-2">
-              <div className="h-8 w-8 rounded-full bg-primary flex items-center justify-center">
+            <div className="flex items-center gap-3">
+              <div className="h-9 w-9 bg-primary flex items-center justify-center">
                 <span className="text-sm font-medium text-primary-foreground">A</span>
               </div>
               <div className="hidden sm:block">
                 <p className="text-sm font-medium">Admin User</p>
-                <p className="text-xs text-muted-foreground">admin@novashop.com</p>
+                <p className="text-xs text-muted-foreground">admin@qhawa.com</p>
               </div>
               <ChevronDown className="h-4 w-4 text-muted-foreground" />
             </div>

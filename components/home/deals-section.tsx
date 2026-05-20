@@ -2,7 +2,7 @@
 
 import { useStore } from '@/lib/store'
 import { ProductCard } from '@/components/product-card'
-import { ArrowRight, Clock, Zap } from 'lucide-react'
+import { ArrowRight } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import Link from 'next/link'
 
@@ -11,63 +11,43 @@ export function DealsSection() {
   const dealsProducts = products.filter((p) => p.discount).slice(0, 4)
 
   return (
-    <section className="py-16 sm:py-24">
+    <section className="py-16 sm:py-24 bg-secondary/30">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         {/* Header */}
-        <div className="mb-10 flex flex-col gap-6 rounded-2xl bg-gradient-to-r from-primary/20 via-accent/10 to-primary/20 p-8 sm:flex-row sm:items-center sm:justify-between">
-          <div className="flex items-center gap-4">
-            <div className="flex h-14 w-14 items-center justify-center rounded-full bg-primary/20">
-              <Zap className="h-7 w-7 text-primary" />
+        <div className="mb-12 flex flex-col gap-6 border-l-4 border-accent bg-card p-8 sm:flex-row sm:items-center sm:justify-between">
+          <div className="flex items-center gap-5">
+            {/* Andean sun symbol */}
+            <div className="flex h-16 w-16 items-center justify-center bg-accent/20">
+              <svg viewBox="0 0 48 48" className="h-10 w-10 text-accent" fill="currentColor">
+                <circle cx="24" cy="24" r="10" />
+                <path d="M24 2v8M24 38v8M2 24h8M38 24h8M7.5 7.5l5.5 5.5M35 35l5.5 5.5M7.5 40.5l5.5-5.5M35 13l5.5-5.5" 
+                      stroke="currentColor" strokeWidth="3" fill="none" />
+              </svg>
             </div>
             <div>
-              <h2 className="text-2xl font-bold tracking-tight sm:text-3xl">
-                Flash Deals
+              <p className="text-sm uppercase tracking-widest text-accent mb-1">Limited Offer</p>
+              <h2 className="text-2xl font-semibold tracking-tight sm:text-3xl">
+                Sacred Season Sale
               </h2>
-              <p className="mt-1 text-muted-foreground">
-                Limited time offers - don&apos;t miss out!
+              <p className="mt-2 text-muted-foreground">
+                Celebrate Inti Raymi with special pricing on select pieces
               </p>
             </div>
           </div>
           
-          {/* Timer */}
-          <div className="flex items-center gap-4">
-            <div className="flex items-center gap-2 text-muted-foreground">
-              <Clock className="h-5 w-5" />
-              <span className="text-sm">Ends in:</span>
-            </div>
-            <div className="flex gap-2">
-              {[
-                { value: '12', label: 'Hours' },
-                { value: '34', label: 'Min' },
-                { value: '56', label: 'Sec' },
-              ].map((item) => (
-                <div
-                  key={item.label}
-                  className="flex flex-col items-center rounded-lg bg-background px-3 py-2"
-                >
-                  <span className="text-xl font-bold tabular-nums">{item.value}</span>
-                  <span className="text-xs text-muted-foreground">{item.label}</span>
-                </div>
-              ))}
-            </div>
-          </div>
-        </div>
-
-        {/* Products Grid */}
-        <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
-          {dealsProducts.map((product) => (
-            <ProductCard key={product.id} product={product} />
-          ))}
-        </div>
-
-        {/* View All */}
-        <div className="mt-10 text-center">
-          <Button variant="outline" size="lg" className="gap-2" asChild>
+          <Button variant="default" size="lg" className="rounded-none gap-2 self-start sm:self-auto" asChild>
             <Link href="/products?sort=deals">
-              View All Deals
+              Shop Sale
               <ArrowRight className="h-4 w-4" />
             </Link>
           </Button>
+        </div>
+
+        {/* Products Grid */}
+        <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
+          {dealsProducts.map((product) => (
+            <ProductCard key={product.id} product={product} />
+          ))}
         </div>
       </div>
     </section>
