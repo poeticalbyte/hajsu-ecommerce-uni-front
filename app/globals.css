@@ -4,62 +4,68 @@
 @custom-variant dark (&:is(.dark *));
 
 :root {
-  /* Andean-inspired warm earth tones */
-  --background: oklch(0.97 0.01 75);
-  --foreground: oklch(0.25 0.04 45);
-  --card: oklch(0.99 0.005 75);
-  --card-foreground: oklch(0.25 0.04 45);
-  --popover: oklch(0.99 0.005 75);
-  --popover-foreground: oklch(0.25 0.04 45);
-  /* Terracotta primary */
-  --primary: oklch(0.52 0.14 35);
+  /* Vibrant Andean-inspired palette */
+  --background: oklch(0.98 0.008 75);
+  --foreground: oklch(0.22 0.04 45);
+  --card: oklch(1 0 0);
+  --card-foreground: oklch(0.22 0.04 45);
+  --popover: oklch(1 0 0);
+  --popover-foreground: oklch(0.22 0.04 45);
+  /* Vibrant terracotta red */
+  --primary: oklch(0.55 0.2 28);
   --primary-foreground: oklch(0.98 0.01 75);
-  /* Sand secondary */
-  --secondary: oklch(0.92 0.03 80);
-  --secondary-foreground: oklch(0.35 0.05 45);
-  /* Warm muted tones */
-  --muted: oklch(0.94 0.02 75);
-  --muted-foreground: oklch(0.5 0.04 45);
-  /* Burnt ochre accent */
-  --accent: oklch(0.58 0.16 55);
+  /* Warm sand with golden undertone */
+  --secondary: oklch(0.93 0.04 85);
+  --secondary-foreground: oklch(0.3 0.06 45);
+  /* Soft cream muted */
+  --muted: oklch(0.95 0.015 80);
+  --muted-foreground: oklch(0.45 0.04 45);
+  /* Rich burnt orange accent */
+  --accent: oklch(0.62 0.19 50);
   --accent-foreground: oklch(0.98 0.01 75);
-  /* Deep burgundy destructive */
-  --destructive: oklch(0.45 0.18 25);
+  /* Deep crimson destructive */
+  --destructive: oklch(0.5 0.22 25);
   --destructive-foreground: oklch(0.98 0.01 75);
-  /* Warm borders */
-  --border: oklch(0.88 0.03 70);
-  --input: oklch(0.94 0.02 75);
-  --ring: oklch(0.52 0.14 35);
-  /* Chart colors - Andean palette */
-  --chart-1: oklch(0.52 0.14 35);
-  --chart-2: oklch(0.55 0.12 180);
-  --chart-3: oklch(0.58 0.16 55);
-  --chart-4: oklch(0.65 0.12 85);
-  --chart-5: oklch(0.45 0.1 280);
+  /* Warm earth borders */
+  --border: oklch(0.85 0.04 70);
+  --input: oklch(0.95 0.02 75);
+  --ring: oklch(0.55 0.2 28);
+  /* Vibrant chart colors */
+  --chart-1: oklch(0.55 0.2 28);
+  --chart-2: oklch(0.58 0.16 195);
+  --chart-3: oklch(0.62 0.19 50);
+  --chart-4: oklch(0.7 0.18 90);
+  --chart-5: oklch(0.5 0.15 280);
   --radius: 0.5rem;
-  /* Sidebar - earthy dark */
-  --sidebar: oklch(0.3 0.06 45);
+  /* Rich earthy sidebar */
+  --sidebar: oklch(0.28 0.07 40);
   --sidebar-foreground: oklch(0.95 0.01 75);
-  --sidebar-primary: oklch(0.58 0.16 55);
+  --sidebar-primary: oklch(0.65 0.18 50);
   --sidebar-primary-foreground: oklch(0.98 0.01 75);
-  --sidebar-accent: oklch(0.38 0.05 45);
+  --sidebar-accent: oklch(0.36 0.06 42);
   --sidebar-accent-foreground: oklch(0.95 0.01 75);
-  --sidebar-border: oklch(0.4 0.05 45);
-  --sidebar-ring: oklch(0.58 0.16 55);
-  /* Status colors */
-  --success: oklch(0.55 0.15 145);
+  --sidebar-border: oklch(0.38 0.05 45);
+  --sidebar-ring: oklch(0.65 0.18 50);
+  /* Vivid status colors */
+  --success: oklch(0.6 0.18 150);
   --success-foreground: oklch(0.98 0.01 75);
-  --warning: oklch(0.65 0.15 85);
-  --warning-foreground: oklch(0.25 0.04 45);
-  /* Andean turquoise highlight */
-  --turquoise: oklch(0.6 0.12 195);
+  --warning: oklch(0.72 0.18 85);
+  --warning-foreground: oklch(0.22 0.04 45);
+  /* Brilliant Andean turquoise */
+  --turquoise: oklch(0.65 0.15 195);
   --turquoise-foreground: oklch(0.98 0.01 75);
-  /* Deep indigo - inspired by traditional dyes */
-  --indigo: oklch(0.4 0.12 280);
+  /* Rich ceremonial indigo */
+  --indigo: oklch(0.45 0.16 280);
   --indigo-foreground: oklch(0.98 0.01 75);
-  /* Gold accent */
-  --gold: oklch(0.72 0.14 85);
-  --gold-foreground: oklch(0.25 0.04 45);
+  /* Inca gold */
+  --gold: oklch(0.78 0.16 90);
+  --gold-foreground: oklch(0.22 0.04 45);
+  /* Fuchsia/magenta - cochineal dye inspired */
+  --fuchsia: oklch(0.6 0.2 350);
+  --fuchsia-foreground: oklch(0.98 0.01 75);
+  /* Forest green - mountain vegetation */
+  --forest: oklch(0.5 0.14 145);
+  --forest-foreground: oklch(0.98 0.01 75);
 }
 
 .dark {
@@ -148,6 +154,10 @@
   --color-indigo-foreground: var(--indigo-foreground);
   --color-gold: var(--gold);
   --color-gold-foreground: var(--gold-foreground);
+  --color-fuchsia: var(--fuchsia);
+  --color-fuchsia-foreground: var(--fuchsia-foreground);
+  --color-forest: var(--forest);
+  --color-forest-foreground: var(--forest-foreground);
 }
 
 @layer base {

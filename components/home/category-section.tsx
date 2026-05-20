@@ -22,6 +22,26 @@ const categoryDescriptions: Record<string, string> = {
   'Home Decor': 'Andean artistry',
 }
 
+const categoryColors: Record<string, string> = {
+  Ponchos: 'from-primary/90 via-primary/50',
+  Sweaters: 'from-turquoise/90 via-turquoise/50',
+  Shawls: 'from-accent/90 via-accent/50',
+  Scarves: 'from-gold/90 via-gold/50',
+  Accessories: 'from-fuchsia/90 via-fuchsia/50',
+  Clothing: 'from-indigo/90 via-indigo/50',
+  'Home Decor': 'from-forest/90 via-forest/50',
+}
+
+const categoryAccents: Record<string, string> = {
+  Ponchos: 'bg-primary',
+  Sweaters: 'bg-turquoise',
+  Shawls: 'bg-accent',
+  Scarves: 'bg-gold',
+  Accessories: 'bg-fuchsia',
+  Clothing: 'bg-indigo',
+  'Home Decor': 'bg-forest',
+}
+
 export function CategorySection() {
   const displayCategories = categories.slice(0, 6)
   
@@ -33,7 +53,7 @@ export function CategorySection() {
           <p className="text-sm font-medium uppercase tracking-widest text-primary mb-2">
             Explore Our Collections
           </p>
-          <h2 className="text-3xl font-semibold tracking-tight sm:text-4xl">
+          <h2 className="text-3xl font-semibold tracking-tight sm:text-4xl bg-gradient-to-r from-primary via-accent to-turquoise bg-clip-text text-transparent inline-block">
             Shop by Category
           </h2>
           <p className="mt-3 text-muted-foreground max-w-2xl mx-auto">
@@ -59,28 +79,31 @@ export function CategorySection() {
                   alt={category}
                   className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
                 />
-                {/* Overlay */}
-                <div className="absolute inset-0 bg-gradient-to-t from-foreground/90 via-foreground/40 to-transparent" />
+                {/* Colorful Overlay */}
+                <div className={`absolute inset-0 bg-gradient-to-t ${categoryColors[category]} to-transparent opacity-80 group-hover:opacity-70 transition-opacity`} />
               </div>
 
               {/* Content */}
               <div className="absolute inset-0 flex flex-col justify-end p-6">
-                <p className="text-xs uppercase tracking-widest text-primary-foreground/80 mb-1">
+                <p className="text-xs uppercase tracking-widest text-white/80 mb-1">
                   {categoryDescriptions[category]}
                 </p>
-                <h3 className="text-2xl font-semibold text-primary-foreground mb-2">
+                <h3 className="text-2xl font-semibold text-white mb-2">
                   {category}
                 </h3>
-                <div className="flex items-center gap-2 text-sm text-primary-foreground/80 transition-all group-hover:text-primary-foreground group-hover:gap-3">
+                <div className="flex items-center gap-2 text-sm text-white/80 transition-all group-hover:text-white group-hover:gap-3">
                   <span>Explore</span>
                   <ArrowRight className="h-4 w-4" />
                 </div>
               </div>
 
               {/* Decorative corner accent */}
-              <div className="absolute top-0 right-0 w-16 h-16 overflow-hidden">
-                <div className="absolute top-0 right-0 w-24 h-24 bg-primary/20 transform rotate-45 translate-x-12 -translate-y-12" />
+              <div className="absolute top-0 right-0 w-20 h-20 overflow-hidden">
+                <div className={`absolute top-0 right-0 w-28 h-28 ${categoryAccents[category]} opacity-60 transform rotate-45 translate-x-14 -translate-y-14`} />
               </div>
+              
+              {/* Bottom color bar */}
+              <div className={`absolute bottom-0 left-0 right-0 h-1 ${categoryAccents[category]}`} />
             </Link>
           ))}
         </div>

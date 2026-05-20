@@ -17,8 +17,8 @@ export function Navbar() {
   return (
     <>
       <nav className="sticky top-0 z-50 w-full border-b border-border bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
-        {/* Decorative Andean pattern border */}
-        <div className="h-1 w-full bg-gradient-to-r from-primary via-accent to-primary" />
+        {/* Decorative Andean pattern border - more colorful */}
+        <div className="h-1.5 w-full bg-gradient-to-r from-primary via-gold via-50% to-turquoise" />
         
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="flex h-20 items-center justify-between gap-4">
@@ -34,7 +34,7 @@ export function Navbar() {
                   />
                   <path 
                     d="M24 12L38 44H10L24 12Z" 
-                    className="fill-accent"
+                    className="fill-turquoise"
                   />
                   <path 
                     d="M24 20L32 44H16L24 20Z" 
