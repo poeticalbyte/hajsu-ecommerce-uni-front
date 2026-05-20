@@ -1,18 +1,18 @@
 import type { Metadata, Viewport } from 'next'
-import { Cormorant_Garamond, Source_Sans_3 } from 'next/font/google'
+import { Playfair_Display, DM_Sans } from 'next/font/google'
 import { Analytics } from '@vercel/analytics/next'
 import './globals.css'
 
-const cormorant = Cormorant_Garamond({ 
+const playfair = Playfair_Display({ 
   subsets: ['latin'],
   weight: ['400', '500', '600', '700'],
-  variable: '--font-cormorant',
+  variable: '--font-playfair',
 })
 
-const sourceSans = Source_Sans_3({ 
+const dmSans = DM_Sans({ 
   subsets: ['latin'],
-  weight: ['400', '500', '600'],
-  variable: '--font-source-sans',
+  weight: ['400', '500', '600', '700'],
+  variable: '--font-dm-sans',
 })
 
 export const metadata: Metadata = {
@@ -51,7 +51,7 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html lang="en" className={`${cormorant.variable} ${sourceSans.variable} bg-background`}>
+    <html lang="en" className={`${playfair.variable} ${dmSans.variable} bg-background`}>
       <body className="font-sans antialiased">
         {children}
         {process.env.NODE_ENV === 'production' && <Analytics />}

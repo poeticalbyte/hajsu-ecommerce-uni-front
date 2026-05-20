@@ -1,61 +1,64 @@
 'use client'
 
 import Link from 'next/link'
-import { Search, ShoppingCart, Menu, X, Settings } from 'lucide-react'
+import { useRouter } from 'next/navigation'
+import { ShoppingCart, Menu, X, LogIn, LogOut, User } from 'lucide-react'
 import { Button } from '@/components/ui/button'
-import { Input } from '@/components/ui/input'
 import { useStore } from '@/lib/store'
 import { useState } from 'react'
 import { CartSidebar } from './cart-sidebar'
+import { SignInModal } from './sign-in-modal'
 
 export function Navbar() {
+  const router = useRouter()
   const [isMenuOpen, setIsMenuOpen] = useState(false)
-  const [isSearchOpen, setIsSearchOpen] = useState(false)
-  const { getCartCount, toggleCart, searchQuery, setSearchQuery } = useStore()
+  const { getCartCount, toggleCart, toggleSignIn, user, signOut } = useStore()
   const cartCount = getCartCount()
+
+  const handleSignOut = () => {
+    signOut()
+    router.push('/')
+  }
+
+  const handleAdminClick = () => {
+    if (user) {
+      router.push('/admin')
+    } else {
+      toggleSignIn()
+    }
+  }
 
   return (
     <>
       <nav className="sticky top-0 z-50 w-full border-b border-border bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
-        {/* Decorative Andean pattern border - more colorful */}
-        <div className="h-1.5 w-full bg-gradient-to-r from-primary via-gold via-50% to-turquoise" />
+        {/* Decorative Andean pattern border */}
+        <div className="h-1 w-full bg-gradient-to-r from-primary via-gold via-50% to-turquoise" />
         
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <div className="flex h-20 items-center justify-between gap-4">
+          <div className="flex h-16 items-center justify-between gap-4">
             {/* Logo */}
-            <Link href="/" className="flex items-center gap-3">
+            <Link href="/" className="flex items-center gap-2.5">
               {/* Andean-inspired logo mark */}
-              <div className="relative flex h-12 w-12 items-center justify-center">
-                <svg viewBox="0 0 48 48" className="h-12 w-12" fill="none">
-                  {/* Stepped pyramid / mountain shape */}
-                  <path 
-                    d="M24 4L44 44H4L24 4Z" 
-                    className="fill-primary"
-                  />
-                  <path 
-                    d="M24 12L38 44H10L24 12Z" 
-                    className="fill-turquoise"
-                  />
-                  <path 
-                    d="M24 20L32 44H16L24 20Z" 
-                    className="fill-background"
-                  />
-                  {/* Sun circle */}
+              <div className="relative flex h-10 w-10 items-center justify-center">
+                <svg viewBox="0 0 48 48" className="h-10 w-10" fill="none">
+                  <path d="M24 4L44 44H4L24 4Z" className="fill-primary" />
+                  <path d="M24 12L38 44H10L24 12Z" className="fill-turquoise" />
+                  <path d="M24 20L32 44H16L24 20Z" className="fill-background" />
                   <circle cx="24" cy="16" r="4" className="fill-gold" />
                 </svg>
               </div>
               <div className="flex flex-col">
-                <span className="text-2xl font-semibold tracking-wide">
+                <span className="text-xl font-semibold tracking-wide">
                   Qhawa
                 </span>
-                <span className="text-xs tracking-widest text-muted-foreground uppercase">
+                <span className="text-[10px] tracking-widest text-muted-foreground uppercase">
                   Andean Textiles
                 </span>
               </div>
             </Link>
 
             {/* Desktop Navigation */}
-            <div className="hidden items-center gap-10 lg:flex">
+            <div className="hidden items-center gap-8 lg:flex">
               <Link
                 href="/"
                 className="text-sm font-medium tracking-wide text-foreground transition-colors hover:text-primary"
@@ -68,54 +71,55 @@ export function Navbar() {
               >
                 Catalogue
               </Link>
-              <button
-                onClick={toggleCart}
-                className="text-sm font-medium tracking-wide text-muted-foreground transition-colors hover:text-primary"
-              >
-                Cart {cartCount > 0 && `(${cartCount})`}
-              </button>
-              <Link
-                href="/admin"
-                className="text-sm font-medium tracking-wide text-muted-foreground transition-colors hover:text-primary"
-              >
-                Admin
-              </Link>
-            </div>
-
-            {/* Search Bar - Desktop */}
-            <div className="hidden flex-1 max-w-sm lg:block">
-              <div className="relative">
-                <Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
-                <Input
-                  type="search"
-                  placeholder="Search textiles..."
-                  value={searchQuery}
-                  onChange={(e) => setSearchQuery(e.target.value)}
-                  className="w-full pl-10 bg-secondary/50 border-border focus-visible:ring-1 focus-visible:ring-primary"
-                />
-              </div>
+              {user ? (
+                <Link
+                  href="/admin"
+                  className="text-sm font-medium tracking-wide text-muted-foreground transition-colors hover:text-primary"
+                >
+                  Admin
+                </Link>
+              ) : (
+                <button
+                  onClick={toggleSignIn}
+                  className="text-sm font-medium tracking-wide text-muted-foreground transition-colors hover:text-primary"
+                >
+                  Sign In
+                </button>
+              )}
             </div>
 
             {/* Actions */}
             <div className="flex items-center gap-1">
-              {/* Mobile Search Toggle */}
-              <Button
-                variant="ghost"
-                size="icon"
-                className="lg:hidden hover:bg-secondary"
-                onClick={() => setIsSearchOpen(!isSearchOpen)}
-              >
-                <Search className="h-5 w-5" />
-                <span className="sr-only">Search</span>
-              </Button>
-
-              {/* Admin */}
-              <Link href="/admin" className="hidden sm:flex">
-                <Button variant="ghost" size="icon" className="hover:bg-secondary">
-                  <Settings className="h-5 w-5" />
-                  <span className="sr-only">Admin</span>
+              {/* User/Sign In */}
+              {user ? (
+                <div className="hidden sm:flex items-center gap-1">
+                  <Link href="/admin">
+                    <Button variant="ghost" size="icon" className="hover:bg-secondary">
+                      <User className="h-5 w-5" />
+                      <span className="sr-only">Admin</span>
+                    </Button>
+                  </Link>
+                  <Button
+                    variant="ghost"
+                    size="icon"
+                    className="hover:bg-secondary"
+                    onClick={handleSignOut}
+                  >
+                    <LogOut className="h-5 w-5" />
+                    <span className="sr-only">Sign Out</span>
+                  </Button>
+                </div>
+              ) : (
+                <Button
+                  variant="ghost"
+                  size="icon"
+                  className="hidden sm:flex hover:bg-secondary"
+                  onClick={toggleSignIn}
+                >
+                  <LogIn className="h-5 w-5" />
+                  <span className="sr-only">Sign In</span>
                 </Button>
-              </Link>
+              )}
 
               {/* Cart */}
               <Button
@@ -150,57 +154,55 @@ export function Navbar() {
             </div>
           </div>
 
-          {/* Mobile Search */}
-          {isSearchOpen && (
-            <div className="border-t border-border py-3 lg:hidden">
-              <div className="relative">
-                <Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
-                <Input
-                  type="search"
-                  placeholder="Search textiles..."
-                  value={searchQuery}
-                  onChange={(e) => setSearchQuery(e.target.value)}
-                  className="w-full pl-10 bg-secondary/50 border-border"
-                />
-              </div>
-            </div>
-          )}
-
           {/* Mobile Menu */}
           {isMenuOpen && (
-            <div className="border-t border-border py-6 lg:hidden">
-              <div className="flex flex-col gap-4">
+            <div className="border-t border-border py-5 lg:hidden">
+              <div className="flex flex-col gap-3">
                 <Link
                   href="/"
-                  className="text-lg font-medium text-foreground transition-colors hover:text-primary"
+                  className="text-base font-medium text-foreground transition-colors hover:text-primary"
                   onClick={() => setIsMenuOpen(false)}
                 >
                   Home
                 </Link>
                 <Link
                   href="/products"
-                  className="text-lg font-medium text-muted-foreground transition-colors hover:text-primary"
+                  className="text-base font-medium text-muted-foreground transition-colors hover:text-primary"
                   onClick={() => setIsMenuOpen(false)}
                 >
                   Catalogue
                 </Link>
-                <button
-                  onClick={() => {
-                    toggleCart()
-                    setIsMenuOpen(false)
-                  }}
-                  className="text-left text-lg font-medium text-muted-foreground transition-colors hover:text-primary"
-                >
-                  Cart {cartCount > 0 && `(${cartCount})`}
-                </button>
                 <div className="my-2 border-t border-border" />
-                <Link
-                  href="/admin"
-                  className="text-lg font-medium text-muted-foreground transition-colors hover:text-primary"
-                  onClick={() => setIsMenuOpen(false)}
-                >
-                  Admin
-                </Link>
+                {user ? (
+                  <>
+                    <Link
+                      href="/admin"
+                      className="text-base font-medium text-muted-foreground transition-colors hover:text-primary"
+                      onClick={() => setIsMenuOpen(false)}
+                    >
+                      Admin
+                    </Link>
+                    <button
+                      onClick={() => {
+                        handleSignOut()
+                        setIsMenuOpen(false)
+                      }}
+                      className="text-left text-base font-medium text-muted-foreground transition-colors hover:text-primary"
+                    >
+                      Sign Out
+                    </button>
+                  </>
+                ) : (
+                  <button
+                    onClick={() => {
+                      toggleSignIn()
+                      setIsMenuOpen(false)
+                    }}
+                    className="text-left text-base font-medium text-muted-foreground transition-colors hover:text-primary"
+                  >
+                    Sign In
+                  </button>
+                )}
               </div>
             </div>
           )}
@@ -208,6 +210,7 @@ export function Navbar() {
       </nav>
 
       <CartSidebar />
+      <SignInModal />
     </>
   )
 }

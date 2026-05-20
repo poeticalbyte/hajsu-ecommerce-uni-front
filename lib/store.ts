@@ -48,6 +48,12 @@ export interface Order {
   createdAt: string
 }
 
+export interface User {
+  email: string
+  name: string
+  isAdmin: boolean
+}
+
 interface StoreState {
   cart: CartItem[]
   orders: Order[]
@@ -58,6 +64,8 @@ interface StoreState {
   selectedBrands: string[]
   sortBy: string
   isCartOpen: boolean
+  isSignInOpen: boolean
+  user: User | null
   
   // Cart actions
   addToCart: (product: Product, quantity?: number, size?: string, color?: string) => void
@@ -68,6 +76,12 @@ interface StoreState {
   getCartCount: () => number
   toggleCart: () => void
   setCartOpen: (open: boolean) => void
+  
+  // Auth actions
+  toggleSignIn: () => void
+  setSignInOpen: (open: boolean) => void
+  signIn: (email: string, password: string) => boolean
+  signOut: () => void
   
   // Filter actions
   setSearchQuery: (query: string) => void
@@ -385,6 +399,8 @@ export const useStore = create<StoreState>()(
       selectedBrands: [],
       sortBy: 'featured',
       isCartOpen: false,
+      isSignInOpen: false,
+      user: null,
 
       addToCart: (product, quantity = 1, size, color) => {
         set((state) => {
@@ -446,6 +462,28 @@ export const useStore = create<StoreState>()(
       
       setCartOpen: (open) => set({ isCartOpen: open }),
 
+      toggleSignIn: () => set((state) => ({ isSignInOpen: !state.isSignInOpen })),
+      
+      setSignInOpen: (open) => set({ isSignInOpen: open }),
+      
+      signIn: (email, password) => {
+        // Simple auth - in production, this would be a proper auth system
+        if (email && password.length >= 4) {
+          set({
+            user: {
+              email,
+              name: email.split('@')[0],
+              isAdmin: true,
+            },
+            isSignInOpen: false,
+          })
+          return true
+        }
+        return false
+      },
+      
+      signOut: () => set({ user: null }),
+
       setSearchQuery: (query) => set({ searchQuery: query }),
 
       setSelectedCategory: (category) => set({ selectedCategory: category }),
@@ -505,7 +543,7 @@ export const useStore = create<StoreState>()(
     }),
     {
       name: 'qhawa-storage',
-      partialize: (state) => ({ cart: state.cart, orders: state.orders }),
+      partialize: (state) => ({ cart: state.cart, orders: state.orders, user: state.user }),
     }
   )
 )
