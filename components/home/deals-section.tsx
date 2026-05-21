@@ -13,10 +13,10 @@ export function DealsSection() {
   return (
     <section className="py-16 sm:py-24 bg-secondary/30">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        {/* Header */}
+        {/* Encabezado */}
         <div className="mb-12 flex flex-col gap-6 border-l-4 border-accent bg-card p-8 sm:flex-row sm:items-center sm:justify-between">
           <div className="flex items-center gap-5">
-            {/* Andean sun symbol */}
+            {/* Símbolo del sol andino */}
             <div className="flex h-16 w-16 items-center justify-center bg-accent/20">
               <svg viewBox="0 0 48 48" className="h-10 w-10 text-accent" fill="currentColor">
                 <circle cx="24" cy="24" r="10" />
@@ -25,25 +25,25 @@ export function DealsSection() {
               </svg>
             </div>
             <div>
-              <p className="text-sm uppercase tracking-widest text-accent mb-1">Limited Offer</p>
+              <p className="text-sm uppercase tracking-widest text-accent mb-1">Oferta Limitada</p>
               <h2 className="text-2xl font-semibold tracking-tight sm:text-3xl">
-                Sacred Season Sale
+                Temporada Sagrada
               </h2>
               <p className="mt-2 text-muted-foreground">
-                Celebrate Inti Raymi with special pricing on select pieces
+                Celebra el Inti Raymi con precios especiales en piezas selectas
               </p>
             </div>
           </div>
           
           <Button variant="default" size="lg" className="rounded-none gap-2 self-start sm:self-auto" asChild>
             <Link href="/products?sort=deals">
-              Shop Sale
+              Ver Ofertas
               <ArrowRight className="h-4 w-4" />
             </Link>
           </Button>
         </div>
 
-        {/* Products Grid */}
+        {/* Grid de productos */}
         <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
           {dealsProducts.map((product) => (
             <ProductCard key={product.id} product={product} />

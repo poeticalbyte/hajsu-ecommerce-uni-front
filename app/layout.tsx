@@ -16,10 +16,10 @@ const dmSans = DM_Sans({
 })
 
 export const metadata: Metadata = {
-  title: 'Qhawa | Authentic Andean Textiles & Traditional Clothing',
-  description: 'Discover handcrafted Andean clothing and textiles. Authentic alpaca wool garments, traditional ponchos, and artisanal accessories from the heart of the Andes.',
+  title: 'Hajsu | Textiles Andinos Auténticos y Ropa Tradicional',
+  description: 'Descubre ropa y textiles andinos artesanales. Prendas de lana de alpaca, ponchos tradicionales y accesorios artesanales desde el corazón de los Andes.',
   generator: 'v0.app',
-  keywords: ['andean textiles', 'alpaca wool', 'traditional clothing', 'peruvian fashion', 'handwoven', 'artisanal', 'ponchos', 'indigenous crafts'],
+  keywords: ['textiles andinos', 'lana de alpaca', 'ropa tradicional', 'moda peruana', 'tejido a mano', 'artesanal', 'ponchos', 'artesanía indígena'],
   icons: {
     icon: [
       {
@@ -51,7 +51,7 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html lang="en" className={`${playfair.variable} ${dmSans.variable} bg-background`}>
+    <html lang="es" className={`${playfair.variable} ${dmSans.variable} bg-background`}>
       <body className="font-sans antialiased">
         {children}
         {process.env.NODE_ENV === 'production' && <Analytics />}

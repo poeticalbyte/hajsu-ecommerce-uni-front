@@ -14,33 +14,33 @@ export function CartSidebar() {
 
   return (
     <>
-      {/* Backdrop */}
+      {/* Fondo */}
       <div
         className="fixed inset-0 z-50 bg-foreground/40 backdrop-blur-sm"
         onClick={() => setCartOpen(false)}
       />
 
-      {/* Sidebar */}
+      {/* Panel lateral */}
       <div className="fixed right-0 top-0 z-50 flex h-full w-full max-w-md flex-col bg-background shadow-2xl">
-        {/* Decorative top border */}
+        {/* Borde superior decorativo */}
         <div className="h-1 w-full bg-gradient-to-r from-primary via-accent to-primary" />
         
-        {/* Header */}
+        {/* Encabezado */}
         <div className="flex items-center justify-between border-b border-border p-5">
           <div className="flex items-center gap-3">
             <ShoppingBag className="h-5 w-5 text-primary" />
-            <h2 className="text-lg font-semibold tracking-wide">Your Cart</h2>
+            <h2 className="text-lg font-semibold tracking-wide">Tu Carrito</h2>
             <span className="bg-primary px-2 py-0.5 text-xs font-medium text-primary-foreground">
               {cart.length}
             </span>
           </div>
           <Button variant="ghost" size="icon" onClick={() => setCartOpen(false)} className="hover:bg-secondary">
             <X className="h-5 w-5" />
-            <span className="sr-only">Close cart</span>
+            <span className="sr-only">Cerrar carrito</span>
           </Button>
         </div>
 
-        {/* Cart Items */}
+        {/* Artículos del carrito */}
         <div className="flex-1 overflow-y-auto p-5">
           {cart.length === 0 ? (
             <div className="flex h-full flex-col items-center justify-center gap-6 text-center">
@@ -48,13 +48,13 @@ export function CartSidebar() {
                 <ShoppingBag className="h-12 w-12 text-muted-foreground" />
               </div>
               <div>
-                <p className="font-semibold text-lg">Your cart is empty</p>
+                <p className="font-semibold text-lg">Tu carrito está vacío</p>
                 <p className="text-sm text-muted-foreground mt-1">
-                  Discover our handcrafted Andean textiles
+                  Descubre nuestros textiles andinos artesanales
                 </p>
               </div>
               <Button onClick={() => setCartOpen(false)} className="rounded-none" asChild>
-                <Link href="/products">Explore Collection</Link>
+                <Link href="/products">Explorar Colección</Link>
               </Button>
             </div>
           ) : (
@@ -91,7 +91,7 @@ export function CartSidebar() {
                         onClick={() => removeFromCart(item.id)}
                       >
                         <Trash2 className="h-4 w-4" />
-                        <span className="sr-only">Remove</span>
+                        <span className="sr-only">Eliminar</span>
                       </Button>
                     </div>
                     <div className="mt-auto flex items-center justify-between pt-2">
@@ -106,7 +106,7 @@ export function CartSidebar() {
                           disabled={item.quantity <= 1}
                         >
                           <Minus className="h-3 w-3" />
-                          <span className="sr-only">Decrease quantity</span>
+                          <span className="sr-only">Disminuir cantidad</span>
                         </Button>
                         <span className="w-8 text-center text-sm font-medium">
                           {item.quantity}
@@ -118,7 +118,7 @@ export function CartSidebar() {
                           onClick={() => updateQuantity(item.id, item.quantity + 1)}
                         >
                           <Plus className="h-3 w-3" />
-                          <span className="sr-only">Increase quantity</span>
+                          <span className="sr-only">Aumentar cantidad</span>
                         </Button>
                       </div>
                       <p className="font-semibold">
@@ -132,7 +132,7 @@ export function CartSidebar() {
           )}
         </div>
 
-        {/* Footer */}
+        {/* Pie del carrito */}
         {cart.length > 0 && (
           <div className="border-t border-border p-5">
             <div className="mb-5 space-y-2">
@@ -141,12 +141,12 @@ export function CartSidebar() {
                 <span>${total.toFixed(2)}</span>
               </div>
               <div className="flex items-center justify-between text-sm">
-                <span className="text-muted-foreground">Shipping</span>
-                <span className="text-primary">{total >= 150 ? 'Free' : '$15.00'}</span>
+                <span className="text-muted-foreground">Envío</span>
+                <span className="text-primary">{total >= 150 ? 'Gratis' : '$15.00'}</span>
               </div>
               {total < 150 && (
                 <p className="text-xs text-muted-foreground">
-                  Add ${(150 - total).toFixed(2)} more for free shipping
+                  Agrega ${(150 - total).toFixed(2)} más para envío gratis
                 </p>
               )}
               <div className="flex items-center justify-between border-t border-border pt-3 text-lg font-semibold">
@@ -156,7 +156,7 @@ export function CartSidebar() {
             </div>
             <div className="flex flex-col gap-2">
               <Button asChild size="lg" className="w-full rounded-none" onClick={() => setCartOpen(false)}>
-                <Link href="/checkout">Proceed to Checkout</Link>
+                <Link href="/checkout">Proceder al Pago</Link>
               </Button>
               <Button
                 variant="outline"
@@ -165,7 +165,7 @@ export function CartSidebar() {
                 onClick={() => setCartOpen(false)}
                 asChild
               >
-                <Link href="/cart">View Full Cart</Link>
+                <Link href="/cart">Ver Carrito Completo</Link>
               </Button>
             </div>
           </div>

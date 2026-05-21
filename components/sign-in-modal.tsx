@@ -21,7 +21,7 @@ export function SignInModal() {
     setError('')
     setIsLoading(true)
 
-    // Simulate a small delay for UX
+    // Simular un pequeño retraso para UX
     await new Promise((resolve) => setTimeout(resolve, 500))
 
     const success = signIn(email, password)
@@ -31,7 +31,7 @@ export function SignInModal() {
       setPassword('')
       router.push('/admin')
     } else {
-      setError('Please enter a valid email and password (min 4 characters)')
+      setError('Por favor ingresa un correo válido y contraseña (mín. 4 caracteres)')
     }
     
     setIsLoading(false)
@@ -41,7 +41,7 @@ export function SignInModal() {
 
   return (
     <>
-      {/* Backdrop */}
+      {/* Fondo */}
       <div
         className="fixed inset-0 z-50 bg-foreground/40 backdrop-blur-sm"
         onClick={() => setSignInOpen(false)}
@@ -50,15 +50,15 @@ export function SignInModal() {
       {/* Modal */}
       <div className="fixed left-1/2 top-1/2 z-50 w-full max-w-md -translate-x-1/2 -translate-y-1/2 px-4">
         <div className="bg-card border border-border shadow-2xl">
-          {/* Header */}
+          {/* Encabezado */}
           <div className="relative border-b border-border px-6 py-5">
             <div className="flex items-center gap-3">
               <div className="flex h-10 w-10 items-center justify-center bg-primary/10">
                 <LogIn className="h-5 w-5 text-primary" />
               </div>
               <div>
-                <h2 className="text-xl font-semibold tracking-tight">Welcome Back</h2>
-                <p className="text-sm text-muted-foreground">Sign in to access admin</p>
+                <h2 className="text-xl font-semibold tracking-tight">Bienvenido</h2>
+                <p className="text-sm text-muted-foreground">Inicia sesión para acceder al admin</p>
               </div>
             </div>
             <button
@@ -66,11 +66,11 @@ export function SignInModal() {
               className="absolute right-4 top-4 p-2 text-muted-foreground hover:text-foreground transition-colors"
             >
               <X className="h-5 w-5" />
-              <span className="sr-only">Close</span>
+              <span className="sr-only">Cerrar</span>
             </button>
           </div>
 
-          {/* Form */}
+          {/* Formulario */}
           <form onSubmit={handleSubmit} className="p-6 space-y-5">
             {error && (
               <div className="bg-destructive/10 border border-destructive/20 text-destructive text-sm px-4 py-3">
@@ -80,12 +80,12 @@ export function SignInModal() {
 
             <div className="space-y-2">
               <label htmlFor="email" className="text-sm font-medium">
-                Email
+                Correo electrónico
               </label>
               <Input
                 id="email"
                 type="email"
-                placeholder="admin@qhawa.com"
+                placeholder="admin@hajsu.com"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 className="bg-background"
@@ -95,13 +95,13 @@ export function SignInModal() {
 
             <div className="space-y-2">
               <label htmlFor="password" className="text-sm font-medium">
-                Password
+                Contraseña
               </label>
               <div className="relative">
                 <Input
                   id="password"
                   type={showPassword ? 'text' : 'password'}
-                  placeholder="Enter your password"
+                  placeholder="Ingresa tu contraseña"
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
                   className="bg-background pr-10"
@@ -126,11 +126,11 @@ export function SignInModal() {
               className="w-full"
               disabled={isLoading}
             >
-              {isLoading ? 'Signing in...' : 'Sign In'}
+              {isLoading ? 'Iniciando sesión...' : 'Iniciar Sesión'}
             </Button>
 
             <p className="text-center text-xs text-muted-foreground">
-              Enter any email and password (min 4 chars) to continue
+              Ingresa cualquier correo y contraseña (mín. 4 caracteres) para continuar
             </p>
           </form>
         </div>

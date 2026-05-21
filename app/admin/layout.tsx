@@ -18,11 +18,11 @@ import {
 import { Button } from '@/components/ui/button'
 
 const navItems = [
-  { href: '/admin', label: 'Dashboard', icon: LayoutDashboard },
-  { href: '/admin/products', label: 'Products', icon: Package },
-  { href: '/admin/orders', label: 'Orders', icon: ShoppingCart },
-  { href: '/admin/customers', label: 'Customers', icon: Users },
-  { href: '/admin/settings', label: 'Settings', icon: Settings },
+  { href: '/admin', label: 'Panel', icon: LayoutDashboard },
+  { href: '/admin/products', label: 'Productos', icon: Package },
+  { href: '/admin/orders', label: 'Pedidos', icon: ShoppingCart },
+  { href: '/admin/customers', label: 'Clientes', icon: Users },
+  { href: '/admin/settings', label: 'Configuración', icon: Settings },
 ]
 
 export default function AdminLayout({
@@ -35,7 +35,7 @@ export default function AdminLayout({
 
   return (
     <div className="min-h-screen bg-background">
-      {/* Mobile Sidebar Backdrop */}
+      {/* Fondo del sidebar móvil */}
       {sidebarOpen && (
         <div
           className="fixed inset-0 z-40 bg-foreground/40 backdrop-blur-sm lg:hidden"
@@ -59,7 +59,7 @@ export default function AdminLayout({
               <circle cx="24" cy="16" r="4" className="fill-gold" />
             </svg>
             <div className="flex flex-col">
-              <span className="text-lg font-semibold text-sidebar-foreground">Qhawa</span>
+              <span className="text-lg font-semibold text-sidebar-foreground">Hajsu</span>
               <span className="text-xs text-sidebar-foreground/60 uppercase tracking-wider">Admin</span>
             </div>
           </Link>
@@ -73,7 +73,7 @@ export default function AdminLayout({
           </Button>
         </div>
 
-        {/* Navigation */}
+        {/* Navegación */}
         <nav className="flex-1 space-y-1 p-4">
           {navItems.map((item) => {
             const isActive = pathname === item.href
@@ -95,25 +95,25 @@ export default function AdminLayout({
           })}
         </nav>
 
-        {/* Store Link */}
+        {/* Enlace a la tienda */}
         <div className="border-t border-sidebar-border p-4">
           <Link
             href="/"
             className="flex items-center gap-3 px-3 py-2.5 text-sm font-medium text-sidebar-foreground/70 transition-colors hover:bg-sidebar-accent hover:text-sidebar-foreground"
           >
             <Store className="h-5 w-5" />
-            View Store
+            Ver Tienda
           </Link>
           <button className="mt-1 flex w-full items-center gap-3 px-3 py-2.5 text-sm font-medium text-sidebar-foreground/70 transition-colors hover:bg-sidebar-accent hover:text-sidebar-foreground">
             <LogOut className="h-5 w-5" />
-            Logout
+            Cerrar Sesión
           </button>
         </div>
       </aside>
 
-      {/* Main Content */}
+      {/* Contenido principal */}
       <div className="lg:pl-64">
-        {/* Top Bar */}
+        {/* Barra superior */}
         <header className="sticky top-0 z-30 flex h-16 items-center justify-between border-b border-border bg-background/95 px-4 backdrop-blur supports-[backdrop-filter]:bg-background/60 lg:px-8">
           <Button
             variant="ghost"
@@ -125,21 +125,21 @@ export default function AdminLayout({
           </Button>
 
           <div className="flex items-center gap-4 ml-auto">
-            {/* User Menu */}
+            {/* Menú de usuario */}
             <div className="flex items-center gap-3">
               <div className="h-9 w-9 bg-primary flex items-center justify-center">
                 <span className="text-sm font-medium text-primary-foreground">A</span>
               </div>
               <div className="hidden sm:block">
-                <p className="text-sm font-medium">Admin User</p>
-                <p className="text-xs text-muted-foreground">admin@qhawa.com</p>
+                <p className="text-sm font-medium">Usuario Admin</p>
+                <p className="text-xs text-muted-foreground">admin@hajsu.com</p>
               </div>
               <ChevronDown className="h-4 w-4 text-muted-foreground" />
             </div>
           </div>
         </header>
 
-        {/* Page Content */}
+        {/* Contenido de la página */}
         <main className="p-4 lg:p-8">{children}</main>
       </div>
     </div>

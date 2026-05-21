@@ -3,33 +3,33 @@ import Image from 'next/image'
 import { Heart, Leaf, Users, Globe } from 'lucide-react'
 
 export const metadata: Metadata = {
-  title: 'About Us | Qhawa Andean Textiles',
-  description: 'Learn about our mission to preserve ancient Andean weaving traditions while supporting artisan communities.',
+  title: 'Nosotros | Hajsu Textiles Andinos',
+  description: 'Conoce nuestra misión de preservar las tradiciones ancestrales del tejido andino mientras apoyamos a las comunidades artesanales.',
 }
 
 const values = [
   {
     icon: Heart,
-    title: 'Artisan Partnership',
-    description: 'We work directly with indigenous weavers, ensuring fair compensation and preserving traditional techniques passed down through generations.',
+    title: 'Alianza Artesanal',
+    description: 'Trabajamos directamente con tejedores indígenas, asegurando una compensación justa y preservando técnicas tradicionales transmitidas por generaciones.',
     color: 'text-primary',
   },
   {
     icon: Leaf,
-    title: 'Sustainable Practices',
-    description: 'Our textiles use natural dyes from local plants and minerals, creating vibrant colors while protecting the environment.',
+    title: 'Prácticas Sostenibles',
+    description: 'Nuestros textiles usan tintes naturales de plantas y minerales locales, creando colores vibrantes mientras protegemos el medio ambiente.',
     color: 'text-forest',
   },
   {
     icon: Users,
-    title: 'Community Impact',
-    description: 'Every purchase supports education, healthcare, and economic development in remote Andean villages.',
+    title: 'Impacto Comunitario',
+    description: 'Cada compra apoya la educación, salud y desarrollo económico en comunidades remotas de los Andes.',
     color: 'text-turquoise',
   },
   {
     icon: Globe,
-    title: 'Cultural Preservation',
-    description: 'We document and share the stories behind each pattern, keeping ancient Andean symbolism alive for future generations.',
+    title: 'Preservación Cultural',
+    description: 'Documentamos y compartimos las historias detrás de cada patrón, manteniendo vivo el simbolismo andino ancestral para las futuras generaciones.',
     color: 'text-gold',
   },
 ]
@@ -37,7 +37,7 @@ const values = [
 export default function AboutPage() {
   return (
     <main className="min-h-screen">
-      {/* Hero Section */}
+      {/* Sección Hero */}
       <section className="relative overflow-hidden bg-gradient-to-br from-secondary via-background to-secondary/50 py-16 sm:py-24">
         <div className="absolute top-0 right-0 w-1/3 h-40 bg-gradient-to-l from-primary/8 to-transparent" />
         <div className="absolute bottom-0 left-0 w-1/4 h-32 bg-gradient-to-r from-gold/10 to-transparent" />
@@ -45,29 +45,29 @@ export default function AboutPage() {
         <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="max-w-3xl">
             <span className="inline-block text-sm font-medium tracking-widest text-primary uppercase mb-4">
-              Our Story
+              Nuestra Historia
             </span>
             <h1 className="font-serif text-4xl font-semibold tracking-tight sm:text-5xl lg:text-6xl text-balance">
-              Weaving Traditions,{' '}
-              <span className="text-primary">Connecting Worlds</span>
+              Tejiendo Tradiciones,{' '}
+              <span className="text-primary">Conectando Mundos</span>
             </h1>
             <p className="mt-6 text-lg text-muted-foreground leading-relaxed max-w-2xl">
-              Qhawa brings the ancient textile traditions of the Andes to the modern world, 
-              connecting master artisans with people who appreciate authentic craftsmanship 
-              and meaningful design.
+              Hajsu lleva las tradiciones textiles ancestrales de los Andes al mundo moderno, 
+              conectando a maestros artesanos con personas que aprecian la artesanía auténtica 
+              y el diseño con significado.
             </p>
           </div>
         </div>
       </section>
 
-      {/* Mission Section */}
+      {/* Sección Misión */}
       <section className="py-16 sm:py-20 border-t border-border">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="grid gap-12 lg:grid-cols-2 lg:gap-16 items-center">
             <div className="relative aspect-[4/3] overflow-hidden bg-muted">
               <Image
                 src="https://images.unsplash.com/photo-1559181567-c3190ca9959b?q=80&w=1600&auto=format&fit=crop"
-                alt="Andean weaver creating traditional textiles"
+                alt="Tejedora andina creando textiles tradicionales"
                 fill
                 className="object-cover"
               />
@@ -75,25 +75,26 @@ export default function AboutPage() {
             </div>
             <div className="space-y-6">
               <span className="text-sm font-medium tracking-widest text-turquoise uppercase">
-                Our Mission
+                Nuestra Misión
               </span>
               <h2 className="font-serif text-3xl font-semibold tracking-tight sm:text-4xl">
-                Preserving Heritage Through Fair Trade
+                Preservando el Patrimonio a Través del Comercio Justo
               </h2>
               <div className="space-y-4 text-muted-foreground leading-relaxed">
                 <p>
-                  In the highlands of Peru and Bolivia, generations of weavers have created 
-                  textiles that tell stories of their ancestors, their land, and their beliefs. 
-                  Each pattern carries meaning, each color represents the natural world around them.
+                  En las tierras altas de Perú y Bolivia, generaciones de tejedores han creado 
+                  textiles que cuentan historias de sus ancestros, su tierra y sus creencias. 
+                  Cada patrón tiene significado, cada color representa el mundo natural que los rodea.
                 </p>
                 <p>
-                  Qhawa was founded to ensure these traditions continue to thrive. We partner 
-                  directly with artisan cooperatives, providing fair wages and sustainable 
-                  income that allows weavers to practice their craft while supporting their families.
+                  Hajsu fue fundada para asegurar que estas tradiciones continúen floreciendo. 
+                  Nos asociamos directamente con cooperativas de artesanos, proporcionando salarios 
+                  justos e ingresos sostenibles que permiten a los tejedores practicar su oficio 
+                  mientras mantienen a sus familias.
                 </p>
                 <p>
-                  When you choose Qhawa, you are not just buying a textile. You are becoming 
-                  part of a movement to preserve cultural heritage and support indigenous communities.
+                  Cuando eliges Hajsu, no solo estás comprando un textil. Te conviertes en parte 
+                  de un movimiento para preservar el patrimonio cultural y apoyar a las comunidades indígenas.
                 </p>
               </div>
             </div>
@@ -101,15 +102,15 @@ export default function AboutPage() {
         </div>
       </section>
 
-      {/* Values Section */}
+      {/* Sección Valores */}
       <section className="py-16 sm:py-20 bg-secondary/30 border-t border-border">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="text-center max-w-2xl mx-auto mb-12">
             <span className="text-sm font-medium tracking-widest text-gold uppercase">
-              What We Stand For
+              Lo Que Defendemos
             </span>
             <h2 className="mt-3 font-serif text-3xl font-semibold tracking-tight sm:text-4xl">
-              Our Values
+              Nuestros Valores
             </h2>
           </div>
           
@@ -132,50 +133,50 @@ export default function AboutPage() {
         </div>
       </section>
 
-      {/* Craft Section */}
+      {/* Sección Artesanía */}
       <section className="py-16 sm:py-20 border-t border-border">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="grid gap-12 lg:grid-cols-2 lg:gap-16 items-center">
             <div className="space-y-6 lg:order-2">
               <span className="text-sm font-medium tracking-widest text-fuchsia uppercase">
-                The Craft
+                La Artesanía
               </span>
               <h2 className="font-serif text-3xl font-semibold tracking-tight sm:text-4xl">
-                Ancient Techniques, Timeless Beauty
+                Técnicas Ancestrales, Belleza Atemporal
               </h2>
               <div className="space-y-4 text-muted-foreground leading-relaxed">
                 <p>
-                  Our textiles are created using backstrap looms, a technique that dates back 
-                  over 4,000 years. Master weavers spend weeks or even months on a single piece, 
-                  carefully interlacing threads to create intricate geometric patterns.
+                  Nuestros textiles son creados usando telares de cintura, una técnica que data 
+                  de hace más de 4,000 años. Los maestros tejedores pasan semanas o incluso meses 
+                  en una sola pieza, entrelazando cuidadosamente hilos para crear intrincados patrones geométricos.
                 </p>
                 <p>
-                  The colors come from natural sources: cochineal insects produce deep reds, 
-                  indigo plants create rich blues, and local minerals provide earthy tones. 
-                  These traditional dyes create colors that remain vibrant for generations.
+                  Los colores provienen de fuentes naturales: los insectos de cochinilla producen rojos 
+                  profundos, las plantas de índigo crean azules intensos, y los minerales locales proporcionan 
+                  tonos terrosos. Estos tintes tradicionales crean colores que permanecen vibrantes por generaciones.
                 </p>
               </div>
               <div className="flex items-center gap-6 pt-4">
                 <div className="text-center">
                   <div className="font-serif text-3xl font-semibold text-primary">4,000+</div>
-                  <div className="text-xs text-muted-foreground uppercase tracking-wide">Years of Tradition</div>
+                  <div className="text-xs text-muted-foreground uppercase tracking-wide">Años de Tradición</div>
                 </div>
                 <div className="h-12 w-px bg-border" />
                 <div className="text-center">
                   <div className="font-serif text-3xl font-semibold text-turquoise">200+</div>
-                  <div className="text-xs text-muted-foreground uppercase tracking-wide">Artisan Partners</div>
+                  <div className="text-xs text-muted-foreground uppercase tracking-wide">Artesanos Aliados</div>
                 </div>
                 <div className="h-12 w-px bg-border" />
                 <div className="text-center">
                   <div className="font-serif text-3xl font-semibold text-gold">15</div>
-                  <div className="text-xs text-muted-foreground uppercase tracking-wide">Communities</div>
+                  <div className="text-xs text-muted-foreground uppercase tracking-wide">Comunidades</div>
                 </div>
               </div>
             </div>
             <div className="relative aspect-[4/3] overflow-hidden bg-muted lg:order-1">
               <Image
                 src="https://images.unsplash.com/photo-1558171813-4c088753af8f?q=80&w=1600&auto=format&fit=crop"
-                alt="Traditional Andean textile patterns"
+                alt="Patrones tradicionales de textiles andinos"
                 fill
                 className="object-cover"
               />
@@ -185,21 +186,21 @@ export default function AboutPage() {
         </div>
       </section>
 
-      {/* CTA Section */}
+      {/* Sección CTA */}
       <section className="py-16 sm:py-20 bg-primary text-primary-foreground">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 text-center">
           <h2 className="font-serif text-3xl font-semibold tracking-tight sm:text-4xl">
-            Discover Our Collection
+            Descubre Nuestra Colección
           </h2>
           <p className="mt-4 text-lg opacity-90 max-w-2xl mx-auto">
-            Each piece in our catalogue represents hours of skilled craftsmanship and 
-            centuries of cultural knowledge. Find your connection to the Andes.
+            Cada pieza en nuestro catálogo representa horas de artesanía experta y 
+            siglos de conocimiento cultural. Encuentra tu conexión con los Andes.
           </p>
           <a 
             href="/products"
             className="mt-8 inline-flex items-center justify-center bg-background text-foreground px-8 py-3 text-sm font-medium tracking-wide transition-colors hover:bg-background/90"
           >
-            Browse Catalogue
+            Ver Catálogo
           </a>
         </div>
       </section>

@@ -20,25 +20,17 @@ export function Navbar() {
     router.push('/')
   }
 
-  const handleAdminClick = () => {
-    if (user) {
-      router.push('/admin')
-    } else {
-      toggleSignIn()
-    }
-  }
-
   return (
     <>
       <nav className="sticky top-0 z-50 w-full border-b border-border bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
-        {/* Decorative Andean pattern border */}
+        {/* Borde decorativo andino */}
         <div className="h-1 w-full bg-gradient-to-r from-primary via-gold via-50% to-turquoise" />
         
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="flex h-16 items-center justify-between gap-4">
             {/* Logo */}
             <Link href="/" className="flex items-center gap-2.5">
-              {/* Andean-inspired logo mark */}
+              {/* Logo inspirado en los Andes */}
               <div className="relative flex h-10 w-10 items-center justify-center">
                 <svg viewBox="0 0 48 48" className="h-10 w-10" fill="none">
                   <path d="M24 4L44 44H4L24 4Z" className="fill-primary" />
@@ -49,33 +41,33 @@ export function Navbar() {
               </div>
               <div className="flex flex-col">
                 <span className="text-xl font-semibold tracking-wide">
-                  Qhawa
+                  Hajsu
                 </span>
                 <span className="text-[10px] tracking-widest text-muted-foreground uppercase">
-                  Andean Textiles
+                  Textiles Andinos
                 </span>
               </div>
             </Link>
 
-            {/* Desktop Navigation */}
+            {/* Navegación Desktop */}
             <div className="hidden items-center gap-8 lg:flex">
               <Link
                 href="/"
                 className="text-sm font-medium tracking-wide text-foreground transition-colors hover:text-primary"
               >
-                Home
+                Inicio
               </Link>
               <Link
                 href="/products"
                 className="text-sm font-medium tracking-wide text-muted-foreground transition-colors hover:text-primary"
               >
-                Catalogue
+                Catálogo
               </Link>
               <Link
                 href="/about"
                 className="text-sm font-medium tracking-wide text-muted-foreground transition-colors hover:text-primary"
               >
-                About Us
+                Nosotros
               </Link>
               {user && (
                 <Link
@@ -87,9 +79,9 @@ export function Navbar() {
               )}
             </div>
 
-            {/* Actions */}
+            {/* Acciones */}
             <div className="flex items-center gap-1">
-              {/* User Icon - Sign In or go to Admin */}
+              {/* Icono de usuario - Iniciar sesión o ir a Admin */}
               <Button
                 variant="ghost"
                 size="icon"
@@ -97,10 +89,10 @@ export function Navbar() {
                 onClick={user ? () => router.push('/admin') : toggleSignIn}
               >
                 <User className="h-5 w-5" />
-                <span className="sr-only">{user ? 'Account' : 'Sign In'}</span>
+                <span className="sr-only">{user ? 'Cuenta' : 'Iniciar sesión'}</span>
               </Button>
 
-              {/* Cart */}
+              {/* Carrito */}
               <Button
                 variant="ghost"
                 size="icon"
@@ -113,10 +105,10 @@ export function Navbar() {
                     {cartCount}
                   </span>
                 )}
-                <span className="sr-only">Cart</span>
+                <span className="sr-only">Carrito</span>
               </Button>
 
-              {/* Mobile Menu Toggle */}
+              {/* Botón menú móvil */}
               <Button
                 variant="ghost"
                 size="icon"
@@ -128,12 +120,12 @@ export function Navbar() {
                 ) : (
                   <Menu className="h-5 w-5" />
                 )}
-                <span className="sr-only">Menu</span>
+                <span className="sr-only">Menú</span>
               </Button>
             </div>
           </div>
 
-          {/* Mobile Menu */}
+          {/* Menú Móvil */}
           {isMenuOpen && (
             <div className="border-t border-border py-5 lg:hidden">
               <div className="flex flex-col gap-3">
@@ -142,21 +134,21 @@ export function Navbar() {
                   className="text-base font-medium text-foreground transition-colors hover:text-primary"
                   onClick={() => setIsMenuOpen(false)}
                 >
-                  Home
+                  Inicio
                 </Link>
                 <Link
                   href="/products"
                   className="text-base font-medium text-muted-foreground transition-colors hover:text-primary"
                   onClick={() => setIsMenuOpen(false)}
                 >
-                  Catalogue
+                  Catálogo
                 </Link>
                 <Link
                   href="/about"
                   className="text-base font-medium text-muted-foreground transition-colors hover:text-primary"
                   onClick={() => setIsMenuOpen(false)}
                 >
-                  About Us
+                  Nosotros
                 </Link>
                 <div className="my-2 border-t border-border" />
                 {user ? (
@@ -175,7 +167,7 @@ export function Navbar() {
                       }}
                       className="text-left text-base font-medium text-muted-foreground transition-colors hover:text-primary"
                     >
-                      Sign Out
+                      Cerrar sesión
                     </button>
                   </>
                 ) : (
@@ -186,7 +178,7 @@ export function Navbar() {
                     }}
                     className="text-left text-base font-medium text-muted-foreground transition-colors hover:text-primary"
                   >
-                    Sign In
+                    Iniciar sesión
                   </button>
                 )}
               </div>
