@@ -93,7 +93,7 @@ export function Footer() {
           <div className="space-y-4">
             <h3 className="text-sm font-semibold uppercase tracking-widest text-turquoise">Boletín</h3>
             <p className="text-sm text-muted-foreground">
-              Historias de los Andes y ofertas exclusivas.
+              Historias de los Andes y ofertas.
             </p>
             <div className="flex gap-2">
               <Input
