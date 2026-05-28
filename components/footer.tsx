@@ -76,7 +76,7 @@ export function Footer() {
             <div className="space-y-3">
               <div className="flex items-center gap-3 text-sm text-muted-foreground">
                 <Phone className="h-4 w-4 text-turquoise" />
-                <span>+51 984 123 456</span>
+                <span>+57 3183213456</span>
               </div>
               <div className="flex items-center gap-3 text-sm text-muted-foreground">
                 <Mail className="h-4 w-4 text-gold" />
@@ -84,7 +84,7 @@ export function Footer() {
               </div>
               <div className="flex items-center gap-3 text-sm text-muted-foreground">
                 <MapPin className="h-4 w-4 text-fuchsia" />
-                <span>Cusco, Perú</span>
+                <span>Carlosama, Colombia</span>
               </div>
             </div>
           </div>
@@ -103,7 +103,7 @@ export function Footer() {
               />
               <Button size="icon" className="shrink-0">
                 <Mail className="h-4 w-4" />
-                <span className="sr-only">Suscribirse</span>
+                <span className="sr-only">Suscribirse.</span>
               </Button>
             </div>
           </div>
@@ -112,20 +112,20 @@ export function Footer() {
         {/* Parte inferior */}
         <div className="mt-10 flex flex-col items-center justify-between gap-4 border-t border-border pt-6 sm:flex-row">
           <p className="text-sm text-muted-foreground">
-            &copy; {new Date().getFullYear()} Hajsu Textiles. Todos los derechos reservados.
+            &copy; {new Date().getFullYear()} Hajsu Textiles. Todos los derechos reservados..
           </p>
           <div className="flex flex-wrap items-center justify-center gap-6 text-xs text-muted-foreground">
             <span className="flex items-center gap-1.5">
               <span className="h-1.5 w-1.5 rounded-full bg-primary" />
-              Comercio Justo
+              Comercio Justo.
             </span>
             <span className="flex items-center gap-1.5">
               <span className="h-1.5 w-1.5 rounded-full bg-turquoise" />
-              Ecológico
+              Ecológico.
             </span>
             <span className="flex items-center gap-1.5">
               <span className="h-1.5 w-1.5 rounded-full bg-gold" />
-              Hecho a Mano
+              Hecho a Mano.
             </span>
           </div>
         </div>
