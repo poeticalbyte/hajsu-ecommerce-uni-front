@@ -2,6 +2,7 @@ import type { Metadata, Viewport } from 'next'
 import { Playfair_Display, DM_Sans } from 'next/font/google'
 import { Analytics } from '@vercel/analytics/next'
 import './globals.css'
+import { ProductsLoader } from '@/components/products-loader'
 
 const playfair = Playfair_Display({ 
   subsets: ['latin'],
@@ -53,6 +54,7 @@ export default function RootLayout({
   return (
     <html lang="es" className={`${playfair.variable} ${dmSans.variable} bg-background`}>
       <body className="font-sans antialiased">
+        <ProductsLoader />
         {children}
         {process.env.NODE_ENV === 'production' && <Analytics />}
       </body>

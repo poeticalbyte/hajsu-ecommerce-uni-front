@@ -66,6 +66,7 @@ interface StoreState {
   isCartOpen: boolean
   isSignInOpen: boolean
   user: User | null
+  productsLoaded: boolean
   
   // Cart actions
   addToCart: (product: Product, quantity?: number, size?: string, color?: string) => void
@@ -76,6 +77,10 @@ interface StoreState {
   getCartCount: () => number
   toggleCart: () => void
   setCartOpen: (open: boolean) => void
+  
+  // Product actions
+  setProducts: (products: Product[]) => void
+  setProductsLoaded: (loaded: boolean) => void
   
   // Auth actions
   toggleSignIn: () => void
@@ -92,6 +97,7 @@ interface StoreState {
   
   // Order actions
   createOrder: (customer: Order['customer']) => Order
+  addOrder: (order: Order) => void
   updateOrderStatus: (orderId: string, status: Order['status']) => void
   
   // Product actions
@@ -400,6 +406,7 @@ export const useStore = create<StoreState>()(
       sortBy: 'featured',
       isCartOpen: false,
       isSignInOpen: false,
+      productsLoaded: false,
       user: null,
 
       addToCart: (product, quantity = 1, size, color) => {
@@ -520,6 +527,14 @@ export const useStore = create<StoreState>()(
           ),
         }))
       },
+
+      addOrder: (order) => {
+        set((state) => ({ orders: [...state.orders, order] }))
+      },
+
+      setProducts: (products) => set({ products }),
+
+      setProductsLoaded: (loaded) => set({ productsLoaded: loaded }),
 
       addProduct: (product) => {
         set((state) => ({

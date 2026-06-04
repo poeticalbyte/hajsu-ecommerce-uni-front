@@ -19,7 +19,7 @@ import Link from 'next/link'
 
 export default function CheckoutPage() {
   const router = useRouter()
-  const { cart, getCartTotal, createOrder } = useStore()
+  const { cart, getCartTotal, clearCart, addOrder } = useStore()
   const [isProcessing, setIsProcessing] = useState(false)
   const [errors, setErrors] = useState<Record<string, string>>({})
   
@@ -86,19 +86,51 @@ export default function CheckoutPage() {
 
     setIsProcessing(true)
 
-    // Simulate payment processing
-    await new Promise((resolve) => setTimeout(resolve, 2000))
+    setErrors({})
 
-    const order = createOrder({
-      name: formData.name,
-      email: formData.email,
-      phone: formData.phone,
-      address: formData.address,
-      city: formData.city,
-      zipCode: formData.zipCode,
-    })
+    try {
+      const response = await fetch('/api/orders', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          name: formData.name,
+          email: formData.email,
+          phone: formData.phone,
+          address: `${formData.address}, ${formData.city}`,
+          city: formData.city,
+          zipCode: formData.zipCode,
+          cart: cart.map((item) => ({
+            id: item.id,
+            quantity: item.quantity,
+            name: item.name,
+            price: item.price,
+            image: item.image,
+            selectedSize: item.selectedSize,
+            selectedColor: item.selectedColor,
+          })),
+        }),
+      })
 
-    router.push(`/checkout/success?order=${order.id}`)
+      const result = await response.json()
+
+      if (!response.ok) {
+        throw new Error(result.error || 'Failed to create order')
+      }
+
+      addOrder(result.order)
+      clearCart()
+      router.push(`/checkout/success?order=${result.order.id}`)
+    } catch (error) {
+      setErrors((prev) => ({
+        ...prev,
+        server:
+          error instanceof Error
+            ? error.message
+            : 'Something went wrong while placing your order.',
+      }))
+    }
   }
 
   if (cart.length === 0) {
@@ -144,6 +176,11 @@ export default function CheckoutPage() {
             <h1 className="mb-6 text-2xl font-bold tracking-tight">Checkout</h1>
 
             <form onSubmit={handleSubmit} className="space-y-8">
+              {errors.server && (
+                <div className="rounded-xl border border-destructive bg-destructive/10 p-4 text-sm text-destructive">
+                  {errors.server}
+                </div>
+              )}
               {/* Contact Information */}
               <div className="rounded-xl bg-card p-6">
                 <h2 className="mb-4 text-lg font-semibold">Contact Information</h2>
