@@ -93,7 +93,7 @@ export function HeroSection() {
               <div className="col-span-7 row-span-2">
                 <div className="aspect-[3/4] overflow-hidden border-4 border-primary/30 shadow-lg shadow-primary/10">
                   <img
-                    src="https://images.unsplash.com/photo-1544022613-e87ca75a784a?w=600"
+                    src="/inicio1.png"
                     alt="Poncho andino tradicional"
                     className="h-full w-full object-cover"
                   />
@@ -104,14 +104,14 @@ export function HeroSection() {
               <div className="col-span-5 space-y-4">
                 <div className="aspect-square overflow-hidden border-4 border-turquoise/30 shadow-lg shadow-turquoise/10">
                   <img
-                    src="https://images.unsplash.com/photo-1594938298603-c8148c4dae35?w=400"
+                    src="/inicio2.jpg"
                     alt="Textiles tejidos coloridos"
                     className="h-full w-full object-cover"
                   />
                 </div>
                 <div className="aspect-square overflow-hidden border-4 border-accent/30 shadow-lg shadow-accent/10">
                   <img
-                    src="https://images.unsplash.com/photo-1601244005535-a48d21d951ac?w=400"
+                    src="/inicio3.webp"
                     alt="Tela aguayo tradicional"
                     className="h-full w-full object-cover"
                   />

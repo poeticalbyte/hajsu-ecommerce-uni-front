@@ -3,12 +3,12 @@ import { ArrowRight } from 'lucide-react'
 import Link from 'next/link'
 
 const categoryImages: Record<string, string> = {
-  Ponchos: 'https://images.unsplash.com/photo-1544022613-e87ca75a784a?w=600',
+  Ponchos: 'poncho.jpg',
   Sweaters: 'https://images.unsplash.com/photo-1434389677669-e08b4cac3105?w=600',
-  Shawls: 'https://images.unsplash.com/photo-1594938298603-c8148c4dae35?w=600',
+  Shawls: '/chales.webp',
   Scarves: 'https://images.unsplash.com/photo-1520903920243-00d872a2d1c9?w=600',
   Accessories: 'https://images.unsplash.com/photo-1576871337622-98d48d1cf531?w=600',
-  Clothing: 'https://images.unsplash.com/photo-1518622358385-8ea7d0794bf6?w=600',
+  Clothing: '/inicio6.webp',
   'Home Decor': 'https://images.unsplash.com/photo-1615529328331-f8917597711f?w=600',
 }
 

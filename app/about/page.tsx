@@ -66,7 +66,7 @@ export default function AboutPage() {
           <div className="grid gap-12 lg:grid-cols-2 lg:gap-16 items-center">
             <div className="relative aspect-[4/3] overflow-hidden bg-muted">
               <Image
-                src="https://images.unsplash.com/photo-1559181567-c3190ca9959b?q=80&w=1600&auto=format&fit=crop"
+                src="/inicio2.jpg"
                 alt="Tejedora andina creando textiles tradicionales"
                 fill
                 className="object-cover"
@@ -175,7 +175,7 @@ export default function AboutPage() {
             </div>
             <div className="relative aspect-[4/3] overflow-hidden bg-muted lg:order-1">
               <Image
-                src="https://images.unsplash.com/photo-1558171813-4c088753af8f?q=80&w=1600&auto=format&fit=crop"
+                src="/inicio6.webp"
                 alt="Patrones tradicionales de textiles andinos"
                 fill
                 className="object-cover"
