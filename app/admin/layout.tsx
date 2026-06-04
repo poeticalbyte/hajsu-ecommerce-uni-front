@@ -1,6 +1,7 @@
 'use client'
 
 import { useState } from 'react'
+import { useRouter } from 'next/navigation'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import {
@@ -16,6 +17,7 @@ import {
   Store,
 } from 'lucide-react'
 import { Button } from '@/components/ui/button'
+import { useStore } from '@/lib/store'
 
 const navItems = [
   { href: '/admin', label: 'Panel', icon: LayoutDashboard },
@@ -32,6 +34,8 @@ export default function AdminLayout({
 }) {
   const pathname = usePathname()
   const [sidebarOpen, setSidebarOpen] = useState(false)
+  const router = useRouter()
+  const { signOut } = useStore()
 
   return (
     <div className="min-h-screen bg-background">
@@ -105,7 +109,14 @@ export default function AdminLayout({
             <Store className="h-5 w-5" />
             Ver Tienda
           </Link>
-          <button className="mt-1 flex w-full items-center gap-3 px-3 py-2.5 text-sm font-medium text-sidebar-foreground/70 transition-colors hover:bg-sidebar-accent hover:text-sidebar-foreground">
+          <button
+            onClick={() => {
+              signOut()
+              setSidebarOpen(false)
+              router.push('/')
+            }}
+            className="mt-1 flex w-full items-center gap-3 px-3 py-2.5 text-sm font-medium text-sidebar-foreground/70 transition-colors hover:bg-sidebar-accent hover:text-sidebar-foreground"
+          >
             <LogOut className="h-5 w-5" />
             Cerrar Sesión
           </button>

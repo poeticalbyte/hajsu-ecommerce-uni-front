@@ -543,7 +543,8 @@ export const useStore = create<StoreState>()(
     }),
     {
       name: 'qhawa-storage',
-      partialize: (state) => ({ cart: state.cart, orders: state.orders, user: state.user }),
+      // Do not persist `user` so the app starts logged out by default
+      partialize: (state) => ({ cart: state.cart, orders: state.orders }),
     }
   )
 )
