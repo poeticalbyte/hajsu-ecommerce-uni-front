@@ -52,12 +52,13 @@ export default function AdminLayout({
         {/* Logo */}
         <div className="flex h-20 items-center justify-between border-b border-sidebar-border px-4">
           <Link href="/admin" className="flex items-center gap-3">
-            <svg viewBox="0 0 48 48" className="h-10 w-10" fill="none">
-              <path d="M24 4L44 44H4L24 4Z" className="fill-sidebar-primary" />
-              <path d="M24 12L38 44H10L24 12Z" className="fill-sidebar-accent" />
-              <path d="M24 20L32 44H16L24 20Z" className="fill-sidebar" />
-              <circle cx="24" cy="16" r="4" className="fill-gold" />
-            </svg>
+            <div className="relative flex h-12 w-12 items-center justify-center overflow-hidden rounded-md">
+              <img
+                src="/logotype.png"
+                alt="Hajsu logo"
+                className="h-12 w-12 object-contain"
+              />
+            </div>
             <div className="flex flex-col">
               <span className="text-lg font-semibold text-sidebar-foreground">Hajsu</span>
               <span className="text-xs text-sidebar-foreground/60 uppercase tracking-wider">Admin</span>

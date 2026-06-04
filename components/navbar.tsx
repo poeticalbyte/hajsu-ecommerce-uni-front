@@ -31,13 +31,12 @@ export function Navbar() {
             {/* Logo */}
             <Link href="/" className="flex items-center gap-2.5">
               {/* Logo inspirado en los Andes */}
-              <div className="relative flex h-10 w-10 items-center justify-center">
-                <svg viewBox="0 0 48 48" className="h-10 w-10" fill="none">
-                  <path d="M24 4L44 44H4L24 4Z" className="fill-primary" />
-                  <path d="M24 12L38 44H10L24 12Z" className="fill-turquoise" />
-                  <path d="M24 20L32 44H16L24 20Z" className="fill-background" />
-                  <circle cx="24" cy="16" r="4" className="fill-gold" />
-                </svg>
+              <div className="relative flex h-12 w-12 items-center justify-center overflow-hidden rounded-md">
+                <img
+                  src="/logotype.png"
+                  alt="Hajsu logo"
+                  className="h-12 w-12 object-contain"
+                />
               </div>
               <div className="flex flex-col">
                 <span className="text-xl font-semibold tracking-wide">
