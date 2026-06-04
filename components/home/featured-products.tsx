@@ -17,14 +17,13 @@ export function FeaturedProducts() {
         <div className="mb-12 flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
           <div>
             <p className="text-sm font-medium uppercase tracking-widest text-primary mb-2">
-              Artisan Selection
+              seleccion artesanal
             </p>
             <h2 className="text-3xl font-semibold tracking-tight sm:text-4xl">
-              Featured Pieces
+              Piezas destacadas
             </h2>
             <p className="mt-3 text-muted-foreground max-w-xl">
-              Our most treasured textiles, each one carrying centuries of tradition 
-              and the skilled hands of master weavers
+              
             </p>
           </div>
           <Button variant="outline" className="rounded-none border-2 gap-2 self-start sm:self-auto" asChild>

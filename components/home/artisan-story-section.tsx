@@ -13,7 +13,7 @@ export function ArtisanStorySection() {
               <div className="space-y-4">
                 <div className="aspect-[4/5] overflow-hidden border-4 border-primary/20">
                   <img
-                    src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=500"
+                    src="/inicio1.png"
                     alt="Tejedora andina trabajando"
                     className="h-full w-full object-cover"
                   />
@@ -35,7 +35,7 @@ export function ArtisanStorySection() {
                 </div>
                 <div className="aspect-[4/5] overflow-hidden border-4 border-fuchsia/20">
                   <img
-                    src="https://images.unsplash.com/photo-1594938298603-c8148c4dae35?w=500"
+                    src="/inicio4.jpg"
                     alt="Patrones andinos coloridos"
                     className="h-full w-full object-cover"
                   />
