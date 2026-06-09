@@ -98,7 +98,7 @@ interface StoreState {
   // Order actions
   createOrder: (customer: Order['customer']) => Order
   addOrder: (order: Order) => void
-  updateOrderStatus: (orderId: string, status: Order['status']) => void
+  updateOrderStatus: (orderId: string, status: Order['status']) => Promise<void>
   setOrders: (orders: Order[]) => void
   loadOrders: () => Promise<void>
   loadProducts: () => Promise<void>
@@ -543,12 +543,33 @@ export const useStore = create<StoreState>()(
         return order
       },
 
-      updateOrderStatus: (orderId, status) => {
-        set((state) => ({
-          orders: state.orders.map((order) =>
-            order.id === orderId ? { ...order, status } : order
-          ),
-        }))
+      updateOrderStatus: async (orderId, status) => {
+        try {
+          const response = await fetch('/api/orders', {
+            method: 'PATCH',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ orderId, status }),
+          })
+
+          if (!response.ok) {
+            const text = await response.text()
+            throw new Error(text || 'Failed to update order status')
+          }
+
+          const result = await response.json()
+          if (result?.order) {
+            const updatedOrder = result.order
+            set((state) => ({
+              orders: state.orders.map((order) =>
+                order.id === updatedOrder.id
+                  ? { ...order, status: updatedOrder.status }
+                  : order
+              ),
+            }))
+          }
+        } catch (error) {
+          console.error('updateOrderStatus failed:', error)
+        }
       },
 
       addOrder: (order) => {

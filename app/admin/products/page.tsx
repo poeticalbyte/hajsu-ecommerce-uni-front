@@ -275,9 +275,27 @@ export default function AdminProductsPage() {
           {editingProduct && (
             <ProductForm
               product={editingProduct}
-              onSubmit={(data) => {
-                updateProduct(editingProduct.id, data)
-                setEditingProduct(null)
+              onSubmit={async (data) => {
+                try {
+                  const response = await fetch('/api/products', {
+                    method: 'PATCH',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ id: editingProduct.id, ...data }),
+                  })
+
+                  if (!response.ok) {
+                    const text = await response.text()
+                    throw new Error(text || 'Failed to update product')
+                  }
+
+                  const updated = await response.json()
+                  updateProduct(editingProduct.id, updated)
+                  await loadProducts()
+                  setEditingProduct(null)
+                } catch (err) {
+                  console.error('Update product error:', err)
+                  alert('Error updating product')
+                }
               }}
               onCancel={() => setEditingProduct(null)}
             />
@@ -351,6 +369,12 @@ function ProductForm({
       return Number.isFinite(num) ? num : undefined
     }
 
+    const stockValue = parseInt((formData.stock || '0').toString(), 10)
+    if (stockValue < 0) {
+      alert('Stock cannot be negative. Please enter 0 or a positive number.')
+      return
+    }
+
     onSubmit({
       name: formData.name,
       shortDescription: formData.shortDescription,
@@ -359,14 +383,16 @@ function ProductForm({
       originalPrice: sanitizeNumber(formData.originalPrice),
       category: formData.category,
       brand: formData.brand,
-      stock: parseInt((formData.stock || '0').toString(), 10) || 0,
+      stock: Math.max(0, stockValue || 0),
       image: formData.image,
       rating: sanitizeNumber(formData.rating) ?? 4.5,
       reviews: parseInt((formData.reviews || '0').toString(), 10) || 0,
       tags: formData.tags.split(',').map((t) => t.trim()).filter(Boolean),
       featured: formData.featured,
       isNew: formData.isNew,
-      discount: sanitizeNumber(formData.discount) ? Math.round(sanitizeNumber(formData.discount)!) : undefined,
+      discount: sanitizeNumber(formData.discount)
+        ? Math.round(sanitizeNumber(formData.discount)!)
+        : undefined,
     })
   }
 
@@ -485,6 +511,8 @@ function ProductForm({
           <label className="mb-2 block text-sm font-medium">Stock</label>
           <Input
             type="number"
+            min={0}
+            step={1}
             value={formData.stock}
             onChange={(e) =>
               setFormData((prev) => ({ ...prev, stock: e.target.value }))

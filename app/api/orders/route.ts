@@ -13,7 +13,7 @@ export async function GET() {
   const normalizedOrders = orders.map((order) => ({
     id: order.id.toString(),
     total: Number(order.total),
-    status: order.status ?? 'PENDING',
+    status: (order.status ?? 'PENDING').toString().toLowerCase(),
     createdAt: order.createdat?.toISOString() ?? new Date().toISOString(),
     customer: {
       name: order.customer.fullname,
@@ -217,5 +217,52 @@ export async function POST(request: Request) {
     console.error('Order creation failed:', error instanceof Error ? error.message : error, error)
     const message = error instanceof Error ? error.message : 'Unable to create order. Please try again.'
     return NextResponse.json({ error: message }, { status: 500 })
+  }
+}
+
+export async function PATCH(request: Request) {
+  try {
+    const body = await request.json()
+    const { orderId, status } = body
+
+    const allowedStatuses = ['pending', 'processing', 'shipped', 'delivered', 'cancelled']
+    if (!orderId || !/^\d+$/.test(String(orderId))) {
+      return NextResponse.json({ error: 'Invalid order id' }, { status: 400 })
+    }
+    if (!allowedStatuses.includes(status)) {
+      return NextResponse.json({ error: 'Invalid order status' }, { status: 400 })
+    }
+
+    const updatedOrder = await prisma.orders.update({
+      where: { id: BigInt(orderId) },
+      data: { status: status.toUpperCase() },
+      include: { customer: true, cartitem: true },
+    })
+
+    const normalized = {
+      id: updatedOrder.id.toString(),
+      total: Number(updatedOrder.total),
+      status: (updatedOrder.status ?? 'PENDING').toString().toLowerCase(),
+      createdAt: updatedOrder.createdat?.toISOString() ?? new Date().toISOString(),
+      customer: {
+        name: updatedOrder.customer.fullname,
+        email: updatedOrder.customer.email,
+        phone: updatedOrder.customer.phone ?? '',
+        address: updatedOrder.customer.address ?? '',
+        city: '',
+        zipCode: '',
+      },
+      items: updatedOrder.cartitem.map((item) => ({
+        id: item.id.toString(),
+        productid: item.productid.toString(),
+        quantity: item.quantity,
+        subtotal: Number(item.subtotal),
+      })),
+    }
+
+    return NextResponse.json({ order: normalized })
+  } catch (error) {
+    console.error('PATCH /api/orders error', error)
+    return NextResponse.json({ error: 'Failed to update order status' }, { status: 500 })
   }
 }

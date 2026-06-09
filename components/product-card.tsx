@@ -98,18 +98,6 @@ export function ProductCard({ product, variant = 'default' }: ProductCardProps) 
 
           {/* Rating */}
           <div className="mb-3 flex items-center gap-2">
-            <div className="flex items-center gap-0.5">
-              {Array.from({ length: 5 }).map((_, i) => (
-                <Star
-                  key={i}
-                  className={`h-3.5 w-3.5 ${
-                    i < Math.floor(product.rating)
-                      ? 'fill-accent text-accent'
-                      : 'fill-muted text-muted'
-                  }`}
-                />
-              ))}
-            </div>
             <span className="text-xs text-muted-foreground">
               ({product.reviews})
             </span>
