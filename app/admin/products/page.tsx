@@ -43,7 +43,7 @@ import {
 } from '@/components/ui/dropdown-menu'
 
 export default function AdminProductsPage() {
-  const { products, addProduct, updateProduct, deleteProduct } = useStore()
+  const { products, addProduct, updateProduct, deleteProduct, loadProducts } = useStore()
   const [searchQuery, setSearchQuery] = useState('')
   const [categoryFilter, setCategoryFilter] = useState('all')
   const [isAddDialogOpen, setIsAddDialogOpen] = useState(false)
@@ -106,6 +106,12 @@ export default function AdminProductsPage() {
 
                     const created = await res.json()
                     addProduct(created)
+                    // Ensure the public catalog reloads from the DB
+                    try {
+                      await loadProducts()
+                    } catch (e) {
+                      console.warn('loadProducts after create failed', e)
+                    }
                     setIsAddDialogOpen(false)
                   } catch (err) {
                     console.error('Create product error:', err)

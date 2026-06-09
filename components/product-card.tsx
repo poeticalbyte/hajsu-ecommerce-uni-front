@@ -14,6 +14,12 @@ interface ProductCardProps {
 export function ProductCard({ product, variant = 'default' }: ProductCardProps) {
   const { addToCart, setCartOpen } = useStore()
 
+  // Debug log to help identify rendering issues when product shape is unexpected
+  if (typeof window !== 'undefined') {
+    // eslint-disable-next-line no-console
+    console.debug('ProductCard render', { id: product.id, name: product.name, price: product.price, image: product.image })
+  }
+
   const handleAddToCart = (e: React.MouseEvent) => {
     e.preventDefault()
     e.stopPropagation()
@@ -21,16 +27,22 @@ export function ProductCard({ product, variant = 'default' }: ProductCardProps) 
     setCartOpen(true)
   }
 
+  const displayPrice = Number(product.price ?? 0)
+
   return (
     <Link href={`/products/${product.id}`} className="group block">
       <div className="relative overflow-hidden bg-card border border-border transition-all duration-300 hover:shadow-lg hover:shadow-primary/10 hover:border-primary/30">
         {/* Image Container */}
         <div className="relative aspect-[3/4] overflow-hidden bg-secondary">
           <Image
-            src={product.image}
-            alt={product.name}
+            src={product.image || '/logotype.png'}
+            alt={product.name || 'Product'}
             fill
             className="object-cover transition-transform duration-700 group-hover:scale-105"
+            onError={(e) => {
+              // eslint-disable-next-line no-console
+              console.warn('Product image load error for', product.id, e)
+            }}
           />
           
           {/* Badges */}
@@ -99,7 +111,7 @@ export function ProductCard({ product, variant = 'default' }: ProductCardProps) 
           {/* Price */}
           <div className="flex items-center gap-2">
             <span className="text-lg font-semibold text-foreground">
-              ${product.price.toFixed(2)}
+              ${displayPrice.toFixed(2)}
             </span>
             {product.originalPrice && (
               <span className="text-sm text-muted-foreground line-through">
