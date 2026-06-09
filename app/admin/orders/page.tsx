@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { useStore, type Order } from '@/lib/store'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
@@ -40,10 +40,15 @@ const statusOptions = [
 ]
 
 export default function AdminOrdersPage() {
-  const { orders, updateOrderStatus } = useStore()
+  const { orders, updateOrderStatus, loadOrders } = useStore()
   const [searchQuery, setSearchQuery] = useState('')
   const [statusFilter, setStatusFilter] = useState('all')
   const [selectedOrder, setSelectedOrder] = useState<Order | null>(null)
+
+  // Load orders from API on mount
+  useEffect(() => {
+    loadOrders().catch((err) => console.error('loadOrders failed', err))
+  }, [loadOrders])
 
   // Filter orders
   const filteredOrders = orders.filter((order) => {
