@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { useRouter } from 'next/navigation'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
@@ -35,7 +35,11 @@ export default function AdminLayout({
   const pathname = usePathname()
   const [sidebarOpen, setSidebarOpen] = useState(false)
   const router = useRouter()
-  const { signOut } = useStore()
+  const { signOut, loadOrders } = useStore()
+
+  useEffect(() => {
+    loadOrders()
+  }, [loadOrders])
 
   return (
     <div className="min-h-screen bg-background">

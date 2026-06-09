@@ -1,6 +1,39 @@
 import { NextResponse } from 'next/server'
 import { prisma } from '@/lib/prisma'
 
+export async function GET() {
+  const orders = await prisma.orders.findMany({
+    orderBy: { createdat: 'desc' },
+    include: {
+      customer: true,
+      cartitem: true,
+    },
+  })
+
+  const normalizedOrders = orders.map((order) => ({
+    id: order.id.toString(),
+    total: Number(order.total),
+    status: order.status ?? 'PENDING',
+    createdAt: order.createdat?.toISOString() ?? new Date().toISOString(),
+    customer: {
+      name: order.customer.fullname,
+      email: order.customer.email,
+      phone: order.customer.phone ?? '',
+      address: order.customer.address ?? '',
+      city: '',
+      zipCode: '',
+    },
+    items: order.cartitem.map((item) => ({
+      id: item.id.toString(),
+      productid: item.productid.toString(),
+      quantity: item.quantity,
+      subtotal: Number(item.subtotal),
+    })),
+  }))
+
+  return NextResponse.json(normalizedOrders)
+}
+
 interface OrderRequest {
   name: string
   email: string

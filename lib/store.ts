@@ -99,6 +99,8 @@ interface StoreState {
   createOrder: (customer: Order['customer']) => Order
   addOrder: (order: Order) => void
   updateOrderStatus: (orderId: string, status: Order['status']) => void
+  setOrders: (orders: Order[]) => void
+  loadOrders: () => Promise<void>
   
   // Product actions
   addProduct: (product: Product) => void
@@ -532,6 +534,26 @@ export const useStore = create<StoreState>()(
         set((state) => ({ orders: [...state.orders, order] }))
       },
 
+      setOrders: (orders) => set({ orders }),
+
+      loadOrders: async () => {
+        try {
+          const response = await fetch('/api/orders')
+
+          if (!response.ok) {
+            const message = await response.text()
+            throw new Error(message || 'Failed to load orders')
+          }
+
+          const orders = (await response.json()) as Order[]
+          if (Array.isArray(orders)) {
+            set({ orders })
+          }
+        } catch (error) {
+          console.error('loadOrders error:', error)
+        }
+      },
+
       setProducts: (products) => set({ products }),
 
       setProductsLoaded: (loaded) => set({ productsLoaded: loaded }),
@@ -558,8 +580,8 @@ export const useStore = create<StoreState>()(
     }),
     {
       name: 'qhawa-storage',
-      // Do not persist `user` so the app starts logged out by default
-      partialize: (state) => ({ cart: state.cart, orders: state.orders }),
+      // Persist only the cart locally; orders should come from the database.
+      partialize: (state) => ({ cart: state.cart }),
     }
   )
 )
