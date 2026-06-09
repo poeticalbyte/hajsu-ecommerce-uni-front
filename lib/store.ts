@@ -556,20 +556,26 @@ export const useStore = create<StoreState>()(
       },
 
         loadProducts: async () => {
-          try {
-            const response = await fetch('/api/products')
-            if (!response.ok) {
-              const message = await response.text()
-              throw new Error(message || 'Failed to load products')
-            }
+              try {
+                console.info('loadProducts: fetching /api/products')
+                const response = await fetch('/api/products')
+                if (!response.ok) {
+                  const message = await response.text()
+                  throw new Error(message || 'Failed to load products')
+                }
 
-            const products = await response.json()
-            if (Array.isArray(products)) {
-              set({ products, productsLoaded: true })
-            }
-          } catch (error) {
-            console.error('loadProducts error:', error)
-          }
+                const products = await response.json()
+                console.info('loadProducts: fetched', Array.isArray(products) ? products.length : 0, 'products')
+                if (Array.isArray(products)) {
+                  set({ products, productsLoaded: true })
+                } else {
+                  console.warn('loadProducts: response is not an array', products)
+                }
+              } catch (error) {
+                console.error('loadProducts error:', error)
+                // mark as loaded to avoid infinite retry loops
+                set({ productsLoaded: true })
+              }
         },
 
       setProducts: (products) => set({ products }),

@@ -84,12 +84,18 @@ function ProductsPageContent() {
     }
   }, [categoryParam, setSelectedCategory])
 
+  const [loadingProducts, setLoadingProducts] = useState(false)
+
   // Load products from API on mount if not already loaded
   useEffect(() => {
-    if (!productsLoaded) {
+    if (!productsLoaded && !loadingProducts) {
+      setLoadingProducts(true)
       loadProducts()
+        .then(() => console.info('Products loaded'))
+        .catch((err) => console.error('loadProducts threw', err))
+        .finally(() => setLoadingProducts(false))
     }
-  }, [productsLoaded, loadProducts])
+  }, [productsLoaded, loadProducts, loadingProducts])
 
   // Filter and sort products
   const filteredProducts = useMemo(() => {
@@ -406,7 +412,11 @@ function ProductsPageContent() {
 
           {/* Products Grid */}
           <div className="flex-1">
-            {filteredProducts.length === 0 ? (
+            {loadingProducts ? (
+              <div className="flex items-center justify-center py-16">
+                <Loader2 className="h-8 w-8 animate-spin text-primary" />
+              </div>
+            ) : filteredProducts.length === 0 ? (
               <div className="flex flex-col items-center justify-center py-16 text-center">
                 <div className="mb-4 flex h-20 w-20 items-center justify-center rounded-full bg-secondary">
                   <SlidersHorizontal className="h-10 w-10 text-muted-foreground" />
