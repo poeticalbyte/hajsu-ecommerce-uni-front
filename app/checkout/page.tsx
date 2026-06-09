@@ -19,7 +19,7 @@ import Link from 'next/link'
 
 export default function CheckoutPage() {
   const router = useRouter()
-  const { cart, getCartTotal, clearCart, addOrder } = useStore()
+  const { cart, getCartTotal, clearCart, addOrder, loadProducts } = useStore()
   const [isProcessing, setIsProcessing] = useState(false)
   const [errors, setErrors] = useState<Record<string, string>>({})
   
@@ -126,7 +126,7 @@ export default function CheckoutPage() {
       }
 
       addOrder(result.order)
-      clearCart()
+      await loadProducts()
       router.push(`/checkout/success?order=${result.order.id}`)
     } catch (error) {
       setErrors((prev) => ({
