@@ -126,7 +126,10 @@ export default function CheckoutPage() {
       }
 
       addOrder(result.order)
-      await loadProducts()
+      clearCart()
+      await loadProducts().catch((loadError) => {
+        console.warn('Failed to refresh products after order:', loadError)
+      })
       router.push(`/checkout/success?order=${result.order.id}`)
     } catch (error) {
       setErrors((prev) => ({

@@ -13,11 +13,12 @@ interface ProductCardProps {
 
 export function ProductCard({ product, variant = 'default' }: ProductCardProps) {
   const { addToCart, setCartOpen } = useStore()
+  const outOfStock = product.stock <= 0
 
   // Debug log to help identify rendering issues when product shape is unexpected
   if (typeof window !== 'undefined') {
     // eslint-disable-next-line no-console
-    console.debug('ProductCard render', { id: product.id, name: product.name, price: product.price, image: product.image })
+    console.debug('ProductCard render', { id: product.id, name: product.name, price: product.price, image: product.image, stock: product.stock })
   }
 
   const handleAddToCart = (e: React.MouseEvent) => {
@@ -57,6 +58,11 @@ export function ProductCard({ product, variant = 'default' }: ProductCardProps) 
                 New Arrival
               </span>
             )}
+            {outOfStock && (
+              <span className="bg-destructive px-3 py-1 text-xs font-medium tracking-wide text-destructive-foreground">
+                Out of stock
+              </span>
+            )}
           </div>
 
           {/* Quick Actions */}
@@ -65,9 +71,10 @@ export function ProductCard({ product, variant = 'default' }: ProductCardProps) 
               onClick={handleAddToCart}
               className="flex-1 gap-2 rounded-none"
               size="sm"
+              disabled={outOfStock}
             >
               <ShoppingCart className="h-4 w-4" />
-              Add to Cart
+              {outOfStock ? 'Sold out' : 'Add to Cart'}
             </Button>
             <Button variant="secondary" size="icon" className="shrink-0 rounded-none">
               <Eye className="h-4 w-4" />

@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useMemo } from 'react'
 import { useStore, type Order } from '@/lib/store'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
@@ -60,6 +60,15 @@ export default function AdminOrdersPage() {
       statusFilter === 'all' || order.status === statusFilter
     return matchesSearch && matchesStatus
   })
+
+  const sortedOrders = useMemo(
+    () =>
+      [...filteredOrders].sort(
+        (a, b) =>
+          new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
+      ),
+    [filteredOrders]
+  )
 
   const getStatusColor = (status: Order['status']) => {
     switch (status) {
@@ -151,7 +160,7 @@ export default function AdminOrdersPage() {
               </tr>
             </thead>
             <tbody className="divide-y divide-border">
-              {filteredOrders.map((order) => (
+              {sortedOrders.map((order) => (
                 <tr key={order.id} className="hover:bg-secondary/50">
                   <td className="px-6 py-4">
                     <span className="font-mono text-sm font-medium">
