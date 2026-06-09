@@ -91,12 +91,27 @@ export default function AdminProductsPage() {
             </DialogHeader>
             <ProductForm
               onSubmit={(data) => {
-                addProduct({
-                  ...data,
-                  id: Date.now().toString(),
-                  images: [data.image],
-                })
-                setIsAddDialogOpen(false)
+                ;(async () => {
+                  try {
+                    const res = await fetch('/api/products', {
+                      method: 'POST',
+                      headers: { 'Content-Type': 'application/json' },
+                      body: JSON.stringify(data),
+                    })
+
+                    if (!res.ok) {
+                      const text = await res.text()
+                      throw new Error(text || 'Failed to create product')
+                    }
+
+                    const created = await res.json()
+                    addProduct(created)
+                    setIsAddDialogOpen(false)
+                  } catch (err) {
+                    console.error('Create product error:', err)
+                    alert('Error creating product')
+                  }
+                })()
               }}
               onCancel={() => setIsAddDialogOpen(false)}
             />
