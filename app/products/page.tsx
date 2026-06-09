@@ -69,6 +69,8 @@ function ProductsPageContent() {
     setSelectedBrands,
     sortBy,
     setSortBy,
+    productsLoaded,
+    loadProducts,
   } = useStore()
 
   const [viewMode, setViewMode] = useState<'grid' | 'list'>('grid')
@@ -81,6 +83,13 @@ function ProductsPageContent() {
       setSelectedCategory(categoryParam)
     }
   }, [categoryParam, setSelectedCategory])
+
+  // Load products from API on mount if not already loaded
+  useEffect(() => {
+    if (!productsLoaded) {
+      loadProducts()
+    }
+  }, [productsLoaded, loadProducts])
 
   // Filter and sort products
   const filteredProducts = useMemo(() => {

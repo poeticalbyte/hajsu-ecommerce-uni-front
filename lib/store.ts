@@ -101,6 +101,7 @@ interface StoreState {
   updateOrderStatus: (orderId: string, status: Order['status']) => void
   setOrders: (orders: Order[]) => void
   loadOrders: () => Promise<void>
+  loadProducts: () => Promise<void>
   
   // Product actions
   addProduct: (product: Product) => void
@@ -553,6 +554,23 @@ export const useStore = create<StoreState>()(
           console.error('loadOrders error:', error)
         }
       },
+
+        loadProducts: async () => {
+          try {
+            const response = await fetch('/api/products')
+            if (!response.ok) {
+              const message = await response.text()
+              throw new Error(message || 'Failed to load products')
+            }
+
+            const products = await response.json()
+            if (Array.isArray(products)) {
+              set({ products, productsLoaded: true })
+            }
+          } catch (error) {
+            console.error('loadProducts error:', error)
+          }
+        },
 
       setProducts: (products) => set({ products }),
 
