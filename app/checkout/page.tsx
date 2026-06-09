@@ -89,6 +89,9 @@ export default function CheckoutPage() {
     setErrors({})
 
     try {
+      const controller = new AbortController()
+      const timeout = setTimeout(() => controller.abort(), 15000)
+
       const response = await fetch('/api/orders', {
         method: 'POST',
         headers: {
@@ -111,12 +114,15 @@ export default function CheckoutPage() {
             selectedColor: item.selectedColor,
           })),
         }),
+        signal: controller.signal,
       })
 
-      const result = await response.json()
+      clearTimeout(timeout)
+
+      const result = await response.json().catch(() => ({ error: 'Invalid server response' }))
 
       if (!response.ok) {
-        throw new Error(result.error || 'Failed to create order')
+        throw new Error(result.error || `Failed to create order (status ${response.status})`)
       }
 
       addOrder(result.order)
@@ -130,6 +136,8 @@ export default function CheckoutPage() {
             ? error.message
             : 'Something went wrong while placing your order.',
       }))
+    } finally {
+      setIsProcessing(false)
     }
   }
 

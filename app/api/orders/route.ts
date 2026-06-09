@@ -73,6 +73,7 @@ export async function POST(request: Request) {
     )
   }
 
+  // Validate and normalize cart items
   const items = cart
     .map((item) => ({
       id: item.id,
@@ -93,6 +94,13 @@ export async function POST(request: Request) {
   }
 
   try {
+    // Ensure product ids are numeric strings (Prisma product.id is BigInt)
+    for (const it of items) {
+      if (!/^\d+$/.test(String(it.id))) {
+        return NextResponse.json({ error: `Invalid product id: ${it.id}` }, { status: 400 })
+      }
+    }
+
     const order = await prisma.$transaction(async (tx) => {
       const existingCustomer = await tx.customer.findUnique({
         where: { email },
@@ -188,10 +196,9 @@ export async function POST(request: Request) {
 
     return NextResponse.json({ order: shapedOrder })
   } catch (error) {
-    console.error('Order creation failed:', error)
-    return NextResponse.json(
-      { error: 'Unable to create order. Please try again.' },
-      { status: 500 }
-    )
+    // Log full error for debugging
+    console.error('Order creation failed:', error instanceof Error ? error.message : error, error)
+    const message = error instanceof Error ? error.message : 'Unable to create order. Please try again.'
+    return NextResponse.json({ error: message }, { status: 500 })
   }
 }
