@@ -422,22 +422,37 @@ export const useStore = create<StoreState>()(
               item.selectedColor === color
           )
 
+          const availableStock = typeof product.stock === 'number' ? product.stock : 0
+
           if (existingItem) {
+            const newQuantity = Math.min(existingItem.quantity + quantity, availableStock)
+            if (newQuantity === existingItem.quantity) {
+              // already at max stock
+              console.warn(`Cannot add more of product ${product.id}, reached stock limit`)
+              return { cart: state.cart }
+            }
+
             return {
               cart: state.cart.map((item) =>
                 item.id === product.id &&
                 item.selectedSize === size &&
                 item.selectedColor === color
-                  ? { ...item, quantity: item.quantity + quantity }
+                  ? { ...item, quantity: newQuantity }
                   : item
               ),
             }
           }
 
+          const quantityToAdd = Math.min(quantity, availableStock)
+          if (quantityToAdd <= 0) {
+            console.warn(`Product ${product.id} has no stock available`) 
+            return { cart: state.cart }
+          }
+
           return {
             cart: [
               ...state.cart,
-              { ...product, quantity, selectedSize: size, selectedColor: color },
+              { ...product, quantity: quantityToAdd, selectedSize: size, selectedColor: color },
             ],
           }
         })
@@ -451,9 +466,13 @@ export const useStore = create<StoreState>()(
 
       updateQuantity: (productId, quantity) => {
         set((state) => ({
-          cart: state.cart.map((item) =>
-            item.id === productId ? { ...item, quantity } : item
-          ),
+          cart: state.cart.map((item) => {
+            if (item.id !== productId) return item
+            const max = typeof item.stock === 'number' ? item.stock : item.quantity
+            const safeQty = Math.max(0, Math.min(quantity, max))
+            if (safeQty !== quantity) console.warn(`Adjusted quantity for ${productId} to available stock ${max}`)
+            return { ...item, quantity: safeQty }
+          }),
         }))
       },
 

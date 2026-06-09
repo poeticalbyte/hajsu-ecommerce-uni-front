@@ -126,6 +126,16 @@ export async function POST(request: Request) {
         throw new Error('Some products in the cart were not found')
       }
 
+      // Ensure sufficient stock for each requested item
+      for (const it of items) {
+        const product = products.find((p) => p.id === BigInt(it.id))
+        if (!product) throw new Error(`Product not found: ${it.id}`)
+        const stock = product.stock ?? 0
+        if (stock < it.quantity) {
+          throw new Error(`Insufficient stock for product ${product.name || it.id}. Available: ${stock}, requested: ${it.quantity}`)
+        }
+      }
+
       const cartItems = items.map((item) => {
         const product = products.find(
           (product) => product.id === BigInt(item.id)
@@ -158,6 +168,15 @@ export async function POST(request: Request) {
           cartitem: true,
         },
       })
+
+      // Decrement stock for each product
+      for (const ci of cartItems) {
+        const prod = products.find((p) => p.id === ci.productid)
+        if (prod) {
+          const newStock = (prod.stock ?? 0) - ci.quantity
+          await tx.product.update({ where: { id: prod.id }, data: { stock: newStock } })
+        }
+      }
 
       return createdOrder
     })
