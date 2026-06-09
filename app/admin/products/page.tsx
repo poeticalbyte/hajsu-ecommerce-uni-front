@@ -343,24 +343,30 @@ function ProductForm({
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault()
+    const sanitizeNumber = (s: string) => {
+      if (!s || typeof s !== 'string') return undefined
+      // Remove thousand separators and normalize decimal comma to dot
+      const cleaned = s.replace(/\./g, '').replace(/,/g, '.')
+      const num = Number(cleaned)
+      return Number.isFinite(num) ? num : undefined
+    }
+
     onSubmit({
       name: formData.name,
       shortDescription: formData.shortDescription,
       description: formData.description,
-      price: parseFloat(formData.price),
-      originalPrice: formData.originalPrice
-        ? parseFloat(formData.originalPrice)
-        : undefined,
+      price: sanitizeNumber(formData.price) ?? 0,
+      originalPrice: sanitizeNumber(formData.originalPrice),
       category: formData.category,
       brand: formData.brand,
-      stock: parseInt(formData.stock),
+      stock: parseInt((formData.stock || '0').toString(), 10) || 0,
       image: formData.image,
-      rating: parseFloat(formData.rating),
-      reviews: parseInt(formData.reviews),
+      rating: sanitizeNumber(formData.rating) ?? 4.5,
+      reviews: parseInt((formData.reviews || '0').toString(), 10) || 0,
       tags: formData.tags.split(',').map((t) => t.trim()).filter(Boolean),
       featured: formData.featured,
       isNew: formData.isNew,
-      discount: formData.discount ? parseInt(formData.discount) : undefined,
+      discount: sanitizeNumber(formData.discount) ? Math.round(sanitizeNumber(formData.discount)!) : undefined,
     })
   }
 

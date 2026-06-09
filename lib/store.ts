@@ -404,7 +404,8 @@ export const useStore = create<StoreState>()(
       products: mockProducts,
       searchQuery: '',
       selectedCategory: 'all',
-      priceRange: [0, 500],
+      // Increase default max price to accommodate high-priced products
+      priceRange: [0, 1000000],
       selectedBrands: [],
       sortBy: 'featured',
       isCartOpen: false,
@@ -567,7 +568,18 @@ export const useStore = create<StoreState>()(
                 const products = await response.json()
                 console.info('loadProducts: fetched', Array.isArray(products) ? products.length : 0, 'products')
                 if (Array.isArray(products)) {
-                  set({ products, productsLoaded: true })
+                  // Adjust priceRange max to include the highest product price
+                  try {
+                    const maxPrice = products.reduce((max: number, p: any) => {
+                      const priceNum = Number(p.price) || 0
+                      return Math.max(max, priceNum)
+                    }, 0)
+                    const currentMin = get().priceRange?.[0] ?? 0
+                    const newMax = Math.max(2000, Math.ceil(maxPrice))
+                    set({ products, productsLoaded: true, priceRange: [currentMin, newMax] })
+                  } catch (e) {
+                    set({ products, productsLoaded: true })
+                  }
                 } else {
                   console.warn('loadProducts: response is not an array', products)
                 }
