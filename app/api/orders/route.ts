@@ -164,23 +164,21 @@ export async function POST(request: Request) {
 
     const shapedOrder = {
       id: order.id.toString(),
-      items: order.cartitem.map((item) => ({
-        ...item,
-        id: item.id.toString(),
-        productid: item.productid.toString(),
-        subtotal: Number(item.subtotal),
-        name: items.find((cartItem) => cartItem.id === item.productid.toString())?.name ?? '',
-        price:
-          Number(items.find((cartItem) => cartItem.id === item.productid.toString())?.price) ||
-          Number(item.subtotal) / item.quantity,
-        image:
-          items.find((cartItem) => cartItem.id === item.productid.toString())?.image ||
-          '/logotype.png',
-        selectedSize:
-          items.find((cartItem) => cartItem.id === item.productid.toString())?.selectedSize,
-        selectedColor:
-          items.find((cartItem) => cartItem.id === item.productid.toString())?.selectedColor,
-      })),
+      items: order.cartitem.map((item) => {
+        const cartInfo = items.find((cartItem) => cartItem.id === item.productid.toString())
+        const price = cartInfo?.price ?? Number(item.subtotal) / item.quantity
+        return {
+          id: item.id.toString(),
+          productid: item.productid.toString(),
+          quantity: item.quantity,
+          subtotal: Number(item.subtotal),
+          name: cartInfo?.name ?? '',
+          price: Number(price),
+          image: cartInfo?.image ?? '/logotype.png',
+          selectedSize: cartInfo?.selectedSize,
+          selectedColor: cartInfo?.selectedColor,
+        }
+      }),
       total: Number(order.total),
       status: order.status ?? 'PENDING',
       customer: {
